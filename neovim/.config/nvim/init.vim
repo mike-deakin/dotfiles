@@ -62,13 +62,9 @@ map <C-n> :NERDTreeToggle<CR>
 
 let g:instant_username = 'mdeakin'
 
-" Theme
-colorscheme onedark
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'onedark'
-let g:onedark_terminal_italics=0 "doesn't work in current iterm2 settings
-" \ Theme
+lua << EOF
+require('theme')
+require('keymap')
+require('lsp') -- Language Server Protocol
+EOF
 
-" Language Server Protocol
-lua require('lsp')
-" \LSP
