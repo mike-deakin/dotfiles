@@ -58,7 +58,7 @@ Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
-map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden = 1
 
 let g:instant_username = 'mdeakin'
 

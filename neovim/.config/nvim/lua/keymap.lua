@@ -12,9 +12,15 @@ local s = {silent = true}
  -- QoL Hacks
 map('n', ';', ':') -- One-touch commands
 map('n', '<C-s>', ':w<CR>') -- Save for normal humans
+map('v', '<C-c>', '"+y') -- Copy to OS clipboard
+
+ -- Quickfix list navigation
+map('n', '<C-j>', ':cnext<CR>')
+map('n', '<C-k>', ':cprev<CR>')
 
  -- Files and navigation
 map('n', '<F2>', ':NERDTreeToggle<CR>')
+map('n', '<C-F2>', ':NERDTreeFind<CR>')
 map('n', '<leader>f', ':Files<CR>')
 
  -- Duplicate line 
@@ -28,3 +34,5 @@ map('n', '<S-M-j>', '"dY"dp') -- Ô == option+shift+j
 map('n', '', '"dY"dP') --  == option+shift+k
 map('n', '<S-M-k>', '"dY"dP') --  == option+shift+k
 
+ -- Custom Commands
+cmd("command! RSource echo stdpath('config') . '/init.vim' | source") -- (R)e-(Source) init.vim
