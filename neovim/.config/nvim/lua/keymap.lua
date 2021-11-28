@@ -35,4 +35,4 @@ map('n', '', '"dY"dP') --  == option+shift+k
 map('n', '<S-M-k>', '"dY"dP') --  == option+shift+k
 
  -- Custom Commands
-cmd("command! RSource echo stdpath('config') . '/init.vim' | source") -- (R)e-(Source) init.vim
+cmd("command! RSource source $MYVIMRC") -- (R)e-(Source) init.vim
