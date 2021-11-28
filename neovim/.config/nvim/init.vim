@@ -24,8 +24,8 @@ call plug#begin()
 " Style
 Plug 'vim-airline/vim-airline'
 Plug 'joshdick/onedark.vim'
-Plug 'sheerun/vim-polyglot' "Improved syntax highlighting etc.
-"Plug 'treesitter goes here'
+"Plug 'sheerun/vim-polyglot' "Improved syntax highlighting etc.
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " File browser
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
