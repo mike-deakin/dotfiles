@@ -17,6 +17,7 @@ filetype plugin indent on "auto-indent based on file type
 
 " Editor niceties
 syntax on
+set completeopt=menu,menuone,noselect
 "set wildmode=list:longest	" bash-like tab completions (?)
 
 " vim-plug plugins "
@@ -54,6 +55,8 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -67,6 +70,7 @@ lua << EOF
 require('theme')
 require('keymap')
 require('lsp') -- Language Server Protocol
+require('cmp-config')
 require('telescope-config')
 EOF
 
