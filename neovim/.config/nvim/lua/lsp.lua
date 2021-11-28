@@ -37,20 +37,22 @@ end
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#
 -- append items from this list to the above url to see docs
-local servers = { 'pylsp' }
+local servers = { 
+  pylsp = {},
+  elixirls = {
+    cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through dotfiles: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#elixirls
+  },
+}
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-for _, lsp in ipairs(servers) do
+for lsp, conf in pairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
-    }
+    },
+    unpack(conf)
   }
 
-nvim_lsp['elixirls'].setup {
-  on_attach = on_attach,
-  cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through dotfiles: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#elixirls
-}
 end
