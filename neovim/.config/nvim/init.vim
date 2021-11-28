@@ -44,8 +44,9 @@ Plug 'scrooloose/nerdcommenter'
 
 " IDEA-like stuff
 Plug 'neovim/nvim-lspconfig' " https://github.com/neovim/nvim-lspconfig
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/plenary.nvim' " required for telescope
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " fzf-style matching for telescope
+Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
 
 " Completions
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -66,5 +67,6 @@ lua << EOF
 require('theme')
 require('keymap')
 require('lsp') -- Language Server Protocol
+require('telescope-config')
 EOF
 
