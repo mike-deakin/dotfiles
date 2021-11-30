@@ -68,10 +68,11 @@ let NERDTreeShowHidden = 1
 let g:instant_username = 'mdeakin'
 
 lua << EOF
-require('theme')
-require('keymap')
-require('lsp') -- Language Server Protocol
-require('cmp-config')
-require('telescope-config')
+require'theme'
+require'keymap'
+require'lsp' -- Language Server Protocol
+require'cmp-config'
+require'telescope-config'
+require'treesitter-config'
 EOF
 
