@@ -1,7 +1,7 @@
 
 ### THEME ###
 
-export TERM='xterm-256color'
+export TERM='xterm-256color-italic'
 
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME="powerlevel9k/powerlevel9k"

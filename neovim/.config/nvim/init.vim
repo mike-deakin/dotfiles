@@ -23,30 +23,31 @@ set completeopt=menu,menuone,noselect
 " vim-plug plugins "
 call plug#begin()
 " Style
-Plug 'vim-airline/vim-airline'
-Plug 'joshdick/onedark.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'navarasu/onedark.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 "Plug 'sheerun/vim-polyglot' "Improved syntax highlighting etc.
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
 
 " File browser
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-Plug 'ryanoasis/vim-devicons'
 
 " Remote pairing
 Plug 'jbyuki/instant.nvim', { 'on': ['InstantStartSession', 'InstantJoinSession'] }
 
 " Additional functions
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'chaoren/vim-wordmotion'
+Plug 'tpope/vim-surround' " surround text with matching character pairs ()[]{}, etc
+Plug 'tpope/vim-abolish' " word-related mutations (case, endings, search/replace, etc
+Plug 'chaoren/vim-wordmotion' " camel-case word motions
 Plug 'yggdroot/indentline'  " Show indentation levels
 Plug 'scrooloose/nerdcommenter'
 
 " IDEA-like stuff
 Plug 'neovim/nvim-lspconfig' " https://github.com/neovim/nvim-lspconfig
 Plug 'nvim-lua/plenary.nvim' " required for telescope
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " fzf-style matching for telescope
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " fzf-style matching for telescope 
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
 
 " Completions
