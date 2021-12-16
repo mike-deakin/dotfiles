@@ -20,13 +20,12 @@ syntax on
 set completeopt=menu,menuone,noselect
 "set wildmode=list:longest	" bash-like tab completions (?)
 
-" vim-plug plugins "
+" vim-plug plugins
 call plug#begin()
 " Style
 Plug 'ryanoasis/vim-devicons'
 Plug 'navarasu/onedark.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-"Plug 'sheerun/vim-polyglot' "Improved syntax highlighting etc.
 Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
 
 " File browser
@@ -49,6 +48,7 @@ Plug 'neovim/nvim-lspconfig' " https://github.com/neovim/nvim-lspconfig
 Plug 'nvim-lua/plenary.nvim' " required for telescope
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " fzf-style matching for telescope 
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
+Plug 'matze/vim-move' " Move block around
 
 " Completions
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -66,6 +66,8 @@ call plug#end()
 let NERDTreeShowHidden = 1
 
 let g:instant_username = 'mdeakin'
+
+let g:move_key_modifier = 'C'
 
 lua << EOF
 require'theme'

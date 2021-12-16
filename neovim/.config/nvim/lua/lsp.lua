@@ -1,6 +1,7 @@
 -- Language Server Protocol
 --
 local nvim_lsp = require('lspconfig')
+local merge = require('merge')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -50,13 +51,11 @@ local servers = {
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 for lsp, conf in pairs(servers) do
-  nvim_lsp[lsp].setup {
+  nvim_lsp[lsp].setup(merge({
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     },
-    capabilities = capabilities,
-    unpack(conf)
-  }
-
+    capabilities = capabilities
+  }, conf))
 end

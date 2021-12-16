@@ -20,8 +20,7 @@ map('n', '<C-k>', ':cprev<CR>')
 
  -- Files and navigation
 map('n', '<F2>', ':NERDTreeToggle<CR>')
-map('n', '<C-F2>', ':NERDTreeFind<CR>')
---map('n', '<leader>f', ':Files<CR>')
+map('n', '<F3>', ':NERDTreeFind<CR>')
 map('n', '<leader>ff', '<cmd>lua require"telescope-config".project_files()<CR>')
 map('n', '<leader>fh', '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<CR>')
 map('n', '<leader>fg', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
