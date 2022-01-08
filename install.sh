@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
 
-# install homebrew on mac
+HERE=$(readlink -f $(dirname ${BASH_SOURCE:-$0}))
+USER_HOME=$(getent passwd ${SUDO_USER:-$USER} | cut -d: -f6)
 
-#̶ ̶i̶n̶s̶t̶a̶l̶l̶ ̶z̶s̶h̶
-#̶ ̶l̶i̶n̶k̶ ̶c̶o̶n̶f̶i̶g̶
-
-#̶ ̶i̶n̶s̶t̶a̶l̶l̶ ̶t̶m̶u̶x̶
-#̶ ̶l̶i̶n̶k̶ ̶c̶o̶n̶f̶i̶g̶
-
-#̶ ̶i̶n̶s̶t̶a̶l̶l̶ ̶n̶e̶o̶v̶i̶m̶
-#̶ ̶l̶i̶n̶k̶ ̶n̶e̶o̶v̶i̶m̶/̶*̶ ̶t̶o̶ ̶~̶/̶
-
-HERE=$(dirname $0)
+NVIM_AUTOLOAD_DIR="$USER_HOME/.local/share/nvim/site/autoload"
+install_vim-plug () {
+    curl -fLo $NVIM_AUTOLOAD_DIR/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	source install_functions_mac.sh
@@ -22,16 +17,17 @@ else
 	exit 1
 fi
 
+echo Installing ZSH
 install_zsh
-[[ ! -f ~/.zshenv ]] && ln -s $HERE/.zshenv ~/.zshenv # points zsh to config in this directory.
+echo "Linking $HERE/.zshenv to $USER_HOME/.zshenv"
+[[ ! -f $USER_HOME/.zshenv ]] && ln -s $HERE/.zshenv $USER_HOME/.zshenv # points zsh to config in this directory.
 
 install_tmux
-[[ ! -f ~/.tmux.conf ]] && ln -s $HERE/.tmux.conf ~/.tmux.conf
+echo "Linking $HERE/.tmux.conf to $USER_HOME/.tmux.conf"
+[[ ! -f $USER_HOME/.tmux.conf ]] && ln -s $HERE/.tmux.conf $USER_HOME/.tmux.conf
 
 install_nvim
-# [[ ! -f ~/.config/nvim ]] && ln -s $HERE/nvim ~/.config/nvim
-[[ ! -d ~/.local/share/nvim/site/autoload ]] && mkdir -p '~/.local/share/nvim/site/autoload'
-[[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]] && ln -s $HERE/neovim/vim-plug/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
+echo "Linking $HERE/.config/nvim to $USER_HOME/.config/nvim"
+[[ ! -d $USER_HOME/.config/nvim ]] && ln -s $HERE/neovim/.config/nvim $USER_HOME/.config/nvim
 
-#install vim-plug
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+install_vim-plug
