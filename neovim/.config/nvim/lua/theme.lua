@@ -1,8 +1,11 @@
-vim.g.onedark_toggle_style_keymap = '<nop>' -- Doesn't work anyway
-vim.g.onedark_style = 'darker'
-vim.g.onedark_transparent_background = true
-vim.g.onedark_hide_ending_tildes = true
-require'onedark'.setup()
+require'onedark'.setup {
+    style = 'dark',
+    transparent = true,
+    term_colors = false,
+    ending_tildes = false,
+}
+require'onedark'.load()
+
 require'lualine'.setup {
     options = {
         theme = 'onedark'
