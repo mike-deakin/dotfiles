@@ -1,3 +1,4 @@
 neovim/.config/nvim/plugged/
 .DS_Store
+.zsh_history
 
