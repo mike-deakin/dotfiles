@@ -3,10 +3,11 @@
 # small as possible and should only define environment variables.
 
 # zsh references $ZDOTFILES to find other dotfiles
-# $0 resolves to this file
-# :A:h modifies the result to be this absolute directory
-# see https://zsh.sourceforge.io/Doc/Release/Expansion.html#Modifiers
-export ZDOTDIR=${0:A:h} # TODO: Does not work!
+# ${(%):-%N} is a magic prompt expansion that resolves this .zshenv file path
+THIS=${(%):-%N}
+# THIS could be the real file or the linked file, so resolve it if possible
+HERE=${$(readlink $THIS):-$THIS}
+export ZDOTDIR=${$(dirname $HERE):-$HOME}
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then

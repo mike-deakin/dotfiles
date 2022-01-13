@@ -8,4 +8,3 @@ Powered by zsh|tmux|neovim
  * Change install_nvim function. ___Because___ NeoVim apt package is an old version and does not work with many plugins & scripts.
  * Install a nerdfont. ___Because___ extra symbols/icons are needed for plugins. Currently the install is manual.
  * Fix chicken-and-egg problem of istalling/depending on plugins
- * Fix zshenv symlink ___Because___ something is complaining about too many links
