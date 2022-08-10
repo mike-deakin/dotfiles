@@ -43,6 +43,8 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- append items from this list to the above url to see docs
 local servers = { 
   pylsp = {},
+  clojure_lsp = {},
+  tsserver = {},
   elixirls = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through dotfiles: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#elixirls
   },

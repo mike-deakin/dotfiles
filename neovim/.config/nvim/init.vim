@@ -22,6 +22,7 @@ set completeopt=menu,menuone,noselect
 
 " vim-plug plugins
 call plug#begin()
+Plug 'dstein64/vim-startuptime'
 " Style
 Plug 'ryanoasis/vim-devicons'
 Plug 'navarasu/onedark.nvim'
@@ -40,7 +41,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround' " surround text with matching character pairs ()[]{}, etc
 Plug 'tpope/vim-abolish' " word-related mutations (case, endings, search/replace, etc
 Plug 'chaoren/vim-wordmotion' " camel-case word motions
-Plug 'yggdroot/indentline'  " Show indentation levels
+Plug 'lukas-reineke/indent-blankline.nvim' " Show indentation levels
 Plug 'scrooloose/nerdcommenter'
 
 " IDEA-like stuff
@@ -49,6 +50,8 @@ Plug 'nvim-lua/plenary.nvim' " required for telescope
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " fzf-style matching for telescope 
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
 Plug 'matze/vim-move' " Move block around
+
+Plug 'Olical/conjure'
 
 " Completions
 Plug 'hrsh7th/cmp-nvim-lsp'

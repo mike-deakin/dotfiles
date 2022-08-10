@@ -10,6 +10,8 @@ local languages = {
   'lua',
   'python',
   'vim',
+  'javascript',
+  'typescript',
 }
 
 for _, lang in ipairs(languages) do

@@ -20,6 +20,15 @@ require'lualine'.setup {
     }
 }
 
+vim.opt.list = true
+vim.opt.listchars:append("eol:⊣")
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    char = '┊',
+    use_treesitter = true,
+    show_end_of_line = true,
+}
+
 -- Some colour overrides
 -- Not ideal. variable themeing would be nice or a fork might be needed?
 vim.cmd[[highlight Comment ctermfg=14 gui=italic guifg=#e55561]]
