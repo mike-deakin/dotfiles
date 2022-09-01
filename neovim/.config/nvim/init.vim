@@ -46,10 +46,10 @@ Plug 'scrooloose/nerdcommenter'
 
 " IDEA-like stuff
 Plug 'neovim/nvim-lspconfig' " https://github.com/neovim/nvim-lspconfig
+Plug 'weilbith/nvim-code-action-menu' " lsp code actions in descriptive window
 Plug 'nvim-lua/plenary.nvim' " required for telescope
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " fzf-style matching for telescope 
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
-Plug 'matze/vim-move' " Move block around
 
 Plug 'Olical/conjure'
 

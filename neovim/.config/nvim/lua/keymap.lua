@@ -3,14 +3,14 @@
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
   if opts then options = vim.tbl_extend('force', options, opts) end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 local cmd = vim.cmd
 local s = {silent = true}
 
  -- QoL Hacks
-map('n', ';', ':') -- One-touch commands
+map({'n', 'v'}, ';', ':') -- One-touch commands
 map('n', '<C-s>', ':w<CR>') -- Save for normal humans
 map('v', '<C-c>', '"+y') -- Copy to OS clipboard
 
@@ -27,6 +27,23 @@ map('n', '<leader>fg', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
 map('n', '<leader>fb', '<cmd>lua require"telescope.builtin".buffers()<CR>')
 map('n', '<leader>f?', '<cmd>lua require"telescope.builtin".help_tags()<CR>')
 map('n', '<leader>g', '<cmd>lua require"telescope.builtin".grep_string()<CR>')
+
+ -- Window/Buffer management
+map('n', '<leader>ba', ':%bd<CR>') -- Delete all open buffers
+map('n', '<leader>bo', ':%bd|e#<CR>') -- Delete all other open buffers
+map('n', '<leader>bb', ':bd<CR>') -- Delete current buffer
+
+ -- Snippets
+map('i', '<Tab>', function()
+    return vim.fn['vsnip#available'](1) == 1 and '<Plug>(vsnip-jump-next)' or '<Tab>'
+end, {expr = true})
+map('i', '<S-Tab>', function()
+    return vim.fn['vsnip#available'](-1) == 1 and '<Plug>(vsnip-jump-next)' or '<S-Tab>'
+end, {expr = true})
+map('n', '<leader>y', '<Plug>(vsnip-select-text)')
+map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
+map('n', '<leader>d', '<Plug>(vsnip-cut-text)')
+map('x', '<leader>d', '<Plug>(vsnip-cut-text)')
 
  -- Duplicate line 
 map('n', '∂', '"dY"dp') -- ∂ == option+d
