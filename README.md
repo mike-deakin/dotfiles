@@ -11,6 +11,7 @@ Powered by zsh|tmux|neovim
  * `git submodule init --recursive` in install script. ___Because___ Prezto is installed via a git submodule
  * Add & update alacritty config. ___Because___ cursor is broken on linux in zsh
  * Fix tmux config. ___Because___ `reattach-to-user-namespace` is mac-only and prompt colors are not working on linux
+ * Upgrade move-line.lua to be `<cmd>` friendly ___Because___ `<cmd>` is neater and more performant, but does not understand `'<,'>` marks (intentional, see `:help <Cmd>`)
 
 ## Notes
 
