@@ -6,7 +6,6 @@ local languages = {
   'bash',
   'c',
   'elixir',
-  'haskell',
   'lua',
   'python',
   'vim',
