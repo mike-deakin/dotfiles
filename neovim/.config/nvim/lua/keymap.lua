@@ -1,3 +1,4 @@
+require'leap'.set_default_keymaps()
 -- Helpers stolen from https://github.com/AyeSpacey/Nvimfy/blob/main/lua/keymaps.lua
 -- In fact, a lot is stolen from Nvimfy
 local function map(mode, lhs, rhs, opts)

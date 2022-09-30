@@ -7,6 +7,7 @@ set rnu			" show relative line numbers
 set cursorline  " highlight current line of cursor
 set fileencodings+=utf-8
 set encoding=utf-8
+let maplocalleader=","
 
 " Tabs & Whitespace
 set tabstop=4		" column width of tab character
@@ -38,11 +39,13 @@ Plug 'jbyuki/instant.nvim', { 'on': ['InstantStartSession', 'InstantJoinSession'
 
 " Additional functions
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth' " auto indent width detection
 Plug 'tpope/vim-surround' " surround text with matching character pairs ()[]{}, etc
 Plug 'tpope/vim-abolish' " word-related mutations (case, endings, search/replace, etc
 Plug 'chaoren/vim-wordmotion' " camel-case word motions
 Plug 'lukas-reineke/indent-blankline.nvim' " Show indentation levels
 Plug 'scrooloose/nerdcommenter'
+Plug 'ggandor/leap.nvim' " label-based navigation (like vimium)
 
 " IDEA-like stuff
 Plug 'neovim/nvim-lspconfig' " https://github.com/neovim/nvim-lspconfig
@@ -80,4 +83,3 @@ require'cmp-config'
 require'telescope-config'
 require'treesitter-config'
 EOF
-
