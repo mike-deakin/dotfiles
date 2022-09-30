@@ -23,12 +23,14 @@ vim.opt.completeopt = "menu,menuone,noselect"
 -- vim-plug plugins
 local Plug = vim.fn['plug#']
 vim.call('plug#begin')
+-- Meta
 Plug 'dstein64/vim-startuptime'
+Plug('nvim-treesitter/nvim-treesitter', { branch = '0.5-compat', ['do'] = ':TSUpdate' })
+
 -- Style
 Plug 'ryanoasis/vim-devicons'
 Plug 'navarasu/onedark.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug('nvim-treesitter/nvim-treesitter', { branch = '0.5-compat', ['do'] = ':TSUpdate' })
 
 -- file browser
 Plug('scrooloose/nerdtree', { ['on'] = 'NERDTreeToggle' })
@@ -53,6 +55,7 @@ Plug 'weilbith/nvim-code-action-menu' -- lsp code actions in descriptive window
 Plug 'nvim-lua/plenary.nvim' -- required for telescope
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' }) -- fzf-style matching for telescope
 Plug 'nvim-telescope/telescope.nvim' -- Fuzzy finder
+Plug 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
 
 Plug 'Olical/conjure'
 
