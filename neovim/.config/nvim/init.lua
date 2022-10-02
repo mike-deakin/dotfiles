@@ -5,6 +5,7 @@ vim.opt.lazyredraw = true
 vim.opt.number = true
 vim.opt.rnu = true
 vim.opt.cursorline = true
+vim.opt.mouse = ""
 vim.opt.fileencodings = vim.opt.fileencodings + { 'utf-8' }
 vim.opt.encoding = 'utf-8'
 vim.g.maplocalleader = ','
@@ -25,7 +26,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
 -- Meta
 Plug 'dstein64/vim-startuptime'
-Plug('nvim-treesitter/nvim-treesitter', { branch = '0.5-compat', ['do'] = ':TSUpdate' })
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
 -- Style
 Plug 'ryanoasis/vim-devicons'
