@@ -22,6 +22,7 @@ vim.cmd([[syntax on]])
 vim.opt.completeopt = "menu,menuone,noselect"
 
 vim.g.NERDTreeShowHidden = 1
+vim.g.NERDTreeCustomOpenArgs = {file = {reuse = 'all', where = 'p', keepopen = 0}}
 vim.g.instant_username = 'mdeakin'
 
 require'plugins'
