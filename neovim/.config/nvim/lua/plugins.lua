@@ -45,6 +45,8 @@ return require('packer').startup({ function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
   use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = { 'nvim-treesitter/nvim-treesitter' } } -- Syntax-aware motions
+  use 'mfussenegger/nvim-dap'
+  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
 
   use 'Olical/conjure'
 
@@ -58,6 +60,13 @@ return require('packer').startup({ function(use)
   use 'hrsh7th/vim-vsnip'
 
   use 'airblade/vim-gitgutter'
+
+  -- Non-plugin packages
+  use {
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npm run compile"
+  }
 
   if packer_bootstrap then
     require 'packer'.sync()
