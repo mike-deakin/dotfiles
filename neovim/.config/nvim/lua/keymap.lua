@@ -32,9 +32,10 @@ map('n', '<leader>f?', '<cmd>lua require"telescope.builtin".help_tags()<CR>')
 map('n', '<leader>g', '<cmd>lua require"telescope.builtin".grep_string()<CR>')
 
  -- Window/Buffer management
+map('n', '<leader>bb', '<cmd>exe "LualineBuffersJump ".v:count<CR>') -- {n}\bb - Jump to buffer with index {n}
 map('n', '<leader>ba', ':%bd<CR>') -- Delete all open buffers
 map('n', '<leader>bo', ':%bd|e#<CR>') -- Delete all other open buffers
-map('n', '<leader>bb', ':bd<CR>') -- Delete current buffer
+map('n', '<leader>bd', ':bd<CR>') -- Delete current buffer
 
  -- Snippets
 map('i', '<Tab>', function()
@@ -47,6 +48,21 @@ map('n', '<leader>y', '<Plug>(vsnip-select-text)')
 map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
 map('n', '<leader>d', '<Plug>(vsnip-cut-text)')
 map('x', '<leader>d', '<Plug>(vsnip-cut-text)')
+
+-- Debugging
+map('n', '<leader>dt', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
+map('n', '<leader>dc', '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>')
+map('n', '<leader>dd', '<cmd>lua require"dap".continue()<CR>')
+map('n', '<F5>', '<cmd>lua require"dap".continue()<CR>')
+map('n', '<leader>do', '<cmd>lua require"dap".step_over()<CR>')
+map('n', '<F10>', '<cmd>lua require"dap".step_over()<CR>')
+map('n', '<leader>di', '<cmd>lua require"dap".step_into()<CR>')
+map('n', '<F11>', '<cmd>lua require"dap".step_into()<CR>')
+map('n', '<leader>du', '<cmd>lua require"dap".step_out()<CR>') -- Think step "up"
+map('n', '<F12>', '<cmd>lua require"dap".step_out()<CR>')
+map('n', '<leader>dr', '<cmd>lua require"dap".repl.open()<CR>')
+map('n', '<leader>dl', '<cmd>lua require"dap".run_last()<CR>')
+map('n', '<leader>dx', '<cmd>lua require"dap".terminate()<CR>')
 
  -- Line operations
 map('n', '<M-j>', '<cmd>lua require"move-line".moveLineDown()<CR>')

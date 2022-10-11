@@ -1,5 +1,7 @@
 local dap = require 'dap'
 
+vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
+
 require 'dap-vscode-js'.setup {
   adapters = { 'pwa-node', 'pwa-chrome' }
 }
@@ -29,3 +31,13 @@ for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "type
     },
   }
 end
+
+local dapGroup = vim.api.nvim_create_augroup("DapCompletions", { clear = true })
+local dapCompletions = require'dap.ext.autocompl'
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "dap-repl" },
+  callback = dapCompletions.attach,
+  group = dapGroup
+})
+
+require'telescope'.load_extension('dap')

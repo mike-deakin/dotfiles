@@ -11,8 +11,8 @@ local languages = {
   'vim',
   'javascript',
   'typescript',
-  'jsx',
   'tsx',
+  'hcl',
 }
 
 for _, lang in ipairs(languages) do

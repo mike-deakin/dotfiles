@@ -43,6 +43,7 @@ return require('packer').startup({ function(use)
   use 'weilbith/nvim-code-action-menu' -- lsp code actions in descriptive window
   use 'nvim-lua/plenary.nvim' -- required for telescope
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
+  use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
   use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = { 'nvim-treesitter/nvim-treesitter' } } -- Syntax-aware motions
   use 'mfussenegger/nvim-dap'
