@@ -14,6 +14,7 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup({ function(use)
   -- Meta
   use 'wbthomason/packer.nvim'
+  use 'nvim-telescope/telescope-packer.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Style
