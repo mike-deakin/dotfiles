@@ -18,13 +18,16 @@ return require('packer').startup({ function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Style
-  use 'ryanoasis/vim-devicons'
   use 'navarasu/onedark.nvim'
   use 'nvim-lualine/lualine.nvim'
 
   -- file browser
-  use { 'scrooloose/nerdtree', opt = true, cmd = { 'NERDTreeToggle' } }
-  use { 'xuyuanp/nerdtree-git-plugin', opt = true, cmd = { 'NERDTreeToggle' } }
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  }
 
   -- remote pairing
   use { 'jbyuki/instant.nvim', opt = true, cmd = { 'InstantStartSession', 'InstantJoinSession' } }

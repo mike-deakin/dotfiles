@@ -30,6 +30,7 @@ require'theme'
 require'keymap'
 require'lsp' -- Language Server Protocol
 require'dap-config'
+require'tree'
 require'cmp-config'
 require'telescope-config'
 require'treesitter-config'
