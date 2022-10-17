@@ -4,8 +4,16 @@ od.setup {
     transparent = true,
     term_colors = false,
     ending_tildes = false,
+    highlights = {
+        Comment = {fg = '#e55561', fmt = 'italic'},
+        Todo = {fg = '#e55561', fmt = 'bold'}
+    }
 }
 od.load()
+
+-- Temporary fixes (onedark is still using deprecated TS highlight groups and some new tags are not linked)
+vim.api.nvim_set_hl(0, "@tag", { link = 'TSTag'})
+vim.api.nvim_set_hl(0, "@constructor", { link = 'TSConstructor'})
 
 require 'lualine'.setup {
     options = {
@@ -36,8 +44,3 @@ require("indent_blankline").setup {
     show_end_of_line = true,
 }
 
--- Some colour overrides
--- Not ideal. variable themeing would be nice or a fork might be needed?
-vim.cmd [[highlight Comment ctermfg=14 gui=italic guifg=#e55561]]
-vim.cmd [[highlight Todo ctermfg=0 ctermbg=11 gui=bold guifg=#e55561]]
-vim.cmd [[highlight TSComment gui=italic guifg=#e55561]]
