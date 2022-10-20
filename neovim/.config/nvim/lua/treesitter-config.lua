@@ -5,6 +5,9 @@ require'nvim-treesitter.configs'.setup {
     indent = {
         enable = true
     },
+    autotag = {
+        enable = true
+    },
     textobjects = {
         select = {
             enable = true,

@@ -16,7 +16,7 @@ return require('packer').startup({ function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-telescope/telescope-packer.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'nvim-treesitter/playground'
+  use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
 
   -- Style
   use 'navarasu/onedark.nvim'
@@ -42,6 +42,14 @@ return require('packer').startup({ function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Show indentation levels
   use 'scrooloose/nerdcommenter'
   use 'ggandor/leap.nvim' -- label-based navigation (like vimium)
+  use { 'nat-418/boole.nvim', config = function() -- Extended increment/decrement behaviour
+    require('boole').setup({
+      mappings = {
+        increment = '<C-a>',
+        decrement = '<C-x>'
+      }
+    })
+  end }
 
   -- IDEA-like stuff
   use 'neovim/nvim-lspconfig' -- https://github.com/neovim/nvim-lspconfig
@@ -53,6 +61,7 @@ return require('packer').startup({ function(use)
   use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = { 'nvim-treesitter/nvim-treesitter' } } -- Syntax-aware motions
   use 'mfussenegger/nvim-dap'
   use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
+  use 'airblade/vim-gitgutter'
 
   use 'Olical/conjure'
 
@@ -64,8 +73,6 @@ return require('packer').startup({ function(use)
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
-
-  use 'airblade/vim-gitgutter'
 
   -- Non-plugin packages
   use {

@@ -5,33 +5,36 @@ od.setup {
     term_colors = false,
     ending_tildes = false,
     highlights = {
-        Comment = {fg = '#e55561', fmt = 'italic'},
-        Todo = {fg = '#e55561', fmt = 'bold'}
+        Comment = { fg = '#e55561', fmt = 'italic' },
+        Todo = { fg = '#e55561', fmt = 'bold' }
     }
 }
 od.load()
 
 -- Temporary fixes (onedark is still using deprecated TS highlight groups and some new tags are not linked)
-vim.api.nvim_set_hl(0, "@tag", { link = 'TSTag'})
-vim.api.nvim_set_hl(0, "@constructor", { link = 'TSConstructor'})
+vim.api.nvim_set_hl(0, "@tag", { link = 'TSTag' })
+vim.api.nvim_set_hl(0, "@constructor", { link = 'TSConstructor' })
 
 require 'lualine'.setup {
     options = {
-        theme = 'onedark'
+        theme = 'onedark',
+        disabled_filetypes = {
+            'NvimTree'
+        }
     },
     tabline = {
-        lualine_a = { { 'buffers', mode = 2, max_length = vim.o.columns * 1/2 } },
-        lualine_b = { 'branch' },
-        lualine_c = { 'filename' },
+        lualine_a = { { 'buffers', mode = 2, max_length = vim.o.columns * 1 / 2 } },
+        lualine_b = { 'filename' },
+        lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = { 'tabs' }
     },
     sections = {
-        lualine_c = {{'filename', path = 1}}
+        lualine_c = { { 'filename', path = 1 } }
     },
     inactive_sections = {
-        lualine_c = {{'filename', path = 1}}
+        lualine_c = { { 'filename', path = 1 } }
     },
 }
 
@@ -43,4 +46,3 @@ require("indent_blankline").setup {
     use_treesitter = true,
     show_end_of_line = true,
 }
-
