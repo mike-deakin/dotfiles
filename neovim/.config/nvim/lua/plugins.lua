@@ -50,6 +50,12 @@ return require('packer').startup({ function(use)
       }
     })
   end }
+  use {
+    "smjonas/live-command.nvim",
+    config = function()
+      require'live-command-config'
+    end,
+  }
 
   -- IDEA-like stuff
   use 'neovim/nvim-lspconfig' -- https://github.com/neovim/nvim-lspconfig
