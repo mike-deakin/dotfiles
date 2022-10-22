@@ -42,43 +42,35 @@ return require('packer').startup({ function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Show indentation levels
   use 'scrooloose/nerdcommenter'
   use 'ggandor/leap.nvim' -- label-based navigation (like vimium)
-  use { 'nat-418/boole.nvim', config = function() -- Extended increment/decrement behaviour
-    require('boole').setup({
-      mappings = {
-        increment = '<C-a>',
-        decrement = '<C-x>'
-      }
-    })
-  end }
-  use {
-    "smjonas/live-command.nvim",
-    config = function()
-      require'live-command-config'
-    end,
-  }
+  use { 'nat-418/boole.nvim', config = function() require'boole-config' end }
+  use { "smjonas/live-command.nvim", config = function() require'live-command-config' end }
 
   -- IDEA-like stuff
-  use 'neovim/nvim-lspconfig' -- https://github.com/neovim/nvim-lspconfig
+  use { 'neovim/nvim-lspconfig', -- https://github.com/neovim/nvim-lspconfig
+    requires = { 'hrsh7th/cmp-nvim-lsp' },
+    config = function() require'lsp' end
+  }
   use 'weilbith/nvim-code-action-menu' -- lsp code actions in descriptive window
   use 'nvim-lua/plenary.nvim' -- required for telescope
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
   use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
-  use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = { 'nvim-treesitter/nvim-treesitter' } } -- Syntax-aware motions
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' } -- Syntax-aware motions
   use 'mfussenegger/nvim-dap'
   use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
   use 'airblade/vim-gitgutter'
 
   use 'Olical/conjure'
 
-  -- Completions
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
+  -- Completions & snippets
+  use { 'hrsh7th/nvim-cmp', requires = {
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-vsnip',
+    'hrsh7th/vim-vsnip',
+  }, config = function() require'cmp-config' end }
 
   -- Non-plugin packages
   use {

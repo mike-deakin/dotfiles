@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true
     },
@@ -13,15 +13,17 @@ require'nvim-treesitter.configs'.setup {
             enable = true,
             lookahead = true,
             keymaps = {
-                ["af"] = { query = "@function.outer", desc = "Select outer part of function region."},
-                ["if"] = { query = "@function.inner", desc = "Select inner part of function region."},
-                ["ac"] = { query = "@class.outer", desc = "Select outer part of class region."},
-                ["ic"] = { query = "@class.inner", desc = "Select inner part of class region."},
+                ["aa"] = { query = "@parameter.outer" }, -- "Around argument"
+                ["ia"] = { query = "@parameter.inner" }, -- "Inside argument"
+                ["af"] = { query = "@function.outer" },
+                ["if"] = { query = "@function.inner" },
+                ["ac"] = { query = "@class.outer" },
+                ["ic"] = { query = "@class.inner" },
             },
-            selection_model = { -- I don't know what this does or means...
+            selection_model = {
                 ['@parameter.outer'] = 'v',
                 ['@function.outer'] = 'V',
-                ['@class.outer'] = '<C-v>',
+                ['@class.outer'] = 'V',
             },
         },
         lsp_interop = {
@@ -37,4 +39,3 @@ require'nvim-treesitter.configs'.setup {
 vim.opt.foldenable = false
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
