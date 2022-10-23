@@ -13,6 +13,7 @@ Powered by zsh|tmux|neovim
  * Fix tmux config. ___Because___ `reattach-to-user-namespace` is mac-only and prompt colors are not working on linux
  * Upgrade move-line.lua to be `<cmd>` friendly ___Because___ `<cmd>` is neater and more performant, but does not understand `'<,'>` marks (intentional, see `:help <Cmd>`)
  * Simplify `nvim-dap` config ___Because___ it currently is limited, depends on an extra plugin, and is hard-coded to work with a Parcel application
+ * Add akinsho/bufferline.nvim ___Because___ it looks cool.
 
 ## Notes
 
