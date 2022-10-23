@@ -4,8 +4,13 @@ HERE=$(readlink -f $(dirname ${BASH_SOURCE:-$0}))
 USER_HOME=$(getent passwd ${SUDO_USER:-$USER} | cut -d: -f6)
 
 NVIM_AUTOLOAD_DIR="$USER_HOME/.local/share/nvim/site/autoload"
-install_vim-plug () {
-    curl -fLo $NVIM_AUTOLOAD_DIR/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+install_nvim_plugin_manager () {
+	git clone --depth 1 "https://github.com/wbthomason/packer.nvim" "$USER_HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+}
+
+install_terminfo () {
+	tic $HERE/terminfo
+	tic -xe tmux-256color $HERE/tmux/tmux.terminfo
 }
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -17,7 +22,9 @@ else
 	exit 1
 fi
 
-echo Installing ZSH
+# Update/initialise submodules (Prezto in particular)
+git sumbodule update --init --recursive
+
 install_zsh
 echo "Linking $HERE/.zshenv to $USER_HOME/.zshenv"
 [[ ! -f $USER_HOME/.zshenv ]] && ln -s $HERE/.zshenv $USER_HOME/.zshenv # points zsh to config in this directory.
@@ -30,4 +37,4 @@ install_nvim
 echo "Linking $HERE/.config/nvim to $USER_HOME/.config/nvim"
 [[ ! -d $USER_HOME/.config/nvim ]] && ln -s $HERE/neovim/.config/nvim $USER_HOME/.config/nvim
 
-install_vim-plug
+install_nvim_plugin_manager

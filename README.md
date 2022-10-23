@@ -4,11 +4,10 @@ Powered by zsh|tmux|neovim
 
 ## TODO/FIXME
 
- * Automate `terminfo` install. ___Because___ italics are not supported by default in MacOS/iTerm2, but are fixed with `terminfo` config.
- * Change install_nvim function. ___Because___ NeoVim apt package is an old version and does not work with many plugins & scripts.
+ * Check `terminfo` install. ___Because___ I haven't tested a fresh install in a while.
+ * Change install_nvim function for linux. ___Because___ NeoVim apt package is an old version and does not work with many plugins & scripts.
  * Install a nerdfont. ___Because___ extra symbols/icons are needed for plugins. Currently the install is manual.
  * Fix chicken-and-egg problem of istalling/depending on plugins
- * `git submodule init --recursive` in install script. ___Because___ Prezto is installed via a git submodule
  * Add & update alacritty config. ___Because___ cursor is broken on linux in zsh
  * Fix tmux config. ___Because___ `reattach-to-user-namespace` is mac-only and prompt colors are not working on linux
  * Upgrade move-line.lua to be `<cmd>` friendly ___Because___ `<cmd>` is neater and more performant, but does not understand `'<,'>` marks (intentional, see `:help <Cmd>`)
