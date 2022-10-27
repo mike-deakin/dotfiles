@@ -8,7 +8,6 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local cmd = vim.cmd
-local s = {silent = true}
 
  -- QoL Hacks
 map({'n', 'v'}, ';', ':') -- One-touch commands
@@ -28,11 +27,12 @@ map('n', '<leader>fh', '<cmd>lua require"telescope.builtin".find_files({ hidden 
 map('n', '<leader>fg', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
 map('n', '<leader>fb', '<cmd>Telescope buffers<CR>')
 map('n', '<leader>fk', '<cmd>Telescope keymaps<CR>')
+map('n', '<leader>fc', '<cmd>Telescope commands<CR>')
 map('n', '<leader>f?', '<cmd>lua require"telescope.builtin".help_tags()<CR>')
 map('n', '<leader>g', '<cmd>lua require"telescope.builtin".grep_string()<CR>')
 
  -- Window/Buffer management
-map('n', '<leader>bb', '<cmd>exe "LualineBuffersJump ".v:count<CR>') -- {n}\bb - Jump to buffer with index {n}
+map('n', '<leader>B', '<cmd>BufferLinePick<CR>')
 map('n', '<leader>ba', ':%bd<CR>') -- Delete all open buffers
 map('n', '<leader>bo', ':%bd|e#<CR>') -- Delete all other open buffers
 map('n', '<leader>bd', ':bd<CR>') -- Delete current buffer
