@@ -26,15 +26,19 @@ fi
 git sumbodule update --init --recursive
 
 install_zsh
-echo "Linking $HERE/.zshenv to $USER_HOME/.zshenv"
-[[ ! -f $USER_HOME/.zshenv ]] && ln -s $HERE/.zshenv $USER_HOME/.zshenv # points zsh to config in this directory.
+echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"
+[[ ! -f $USER_HOME/.zshenv ]] && ln -s $HERE/zsh/.zshenv $USER_HOME/.zshenv # points zsh to config in this directory.
 
 install_tmux
-echo "Linking $HERE/.tmux.conf to $USER_HOME/.tmux.conf"
-[[ ! -f $USER_HOME/.tmux.conf ]] && ln -s $HERE/.tmux.conf $USER_HOME/.tmux.conf
+echo "Linking $HERE/tmux/.tmux.conf to $USER_HOME/.tmux.conf"
+[[ ! -f $USER_HOME/.tmux.conf ]] && ln -s $HERE/tmux/.tmux.conf $USER_HOME/.tmux.conf
 
 install_nvim
-echo "Linking $HERE/.config/nvim to $USER_HOME/.config/nvim"
+echo "Linking $HERE/noevim/.config/nvim to $USER_HOME/.config/nvim"
 [[ ! -d $USER_HOME/.config/nvim ]] && ln -s $HERE/neovim/.config/nvim $USER_HOME/.config/nvim
+
+echo "Linking $HERE/git/.gitconfig to $USER_HOME/.gitconfig"
+[[ ! -d $USER_HOME/.config/nvim ]] && ln -s $HERE/git/.gitconfig $USER_HOME/.gitconfig \
+	&& ln -s $HERE/git/.gitignore $USER_HOME/.gitignore
 
 install_nvim_plugin_manager

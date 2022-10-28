@@ -1,0 +1,18 @@
+[alias]
+	unstage = reset HEAD --
+	log-pretty = log --oneline --all --graph
+	dv = difftool -t vimdiff -y
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
+[pull]
+	rebase = true
+[merge]
+	tool = nvimdiff
+	conflictstyle = diff3
+[includeIf "gitdir:~/work"]
+	path = ~/.gitconfig-work
+[includeIf "gitdir:~/play"]
+	path = ~/.gitconfig-play
