@@ -23,7 +23,7 @@ else
 fi
 
 # Update/initialise submodules (Prezto in particular)
-git sumbodule update --init --recursive
+git submodule update --init --recursive
 
 install_zsh
 echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"
@@ -41,4 +41,4 @@ echo "Linking $HERE/git/.gitconfig to $USER_HOME/.gitconfig"
 [[ ! -d $USER_HOME/.config/nvim ]] && ln -s $HERE/git/.gitconfig $USER_HOME/.gitconfig \
 	&& ln -s $HERE/git/.gitignore $USER_HOME/.gitignore
 
-install_nvim_plugin_manager
+#install_nvim_plugin_manager

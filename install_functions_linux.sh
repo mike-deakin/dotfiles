@@ -13,7 +13,18 @@ install_tmux() {
 }
 
 install_nvim () {
-    	echo "*NOT* installing neovim! The version in apt is too old!"
-	# apt install neovim
+	[[ ! -d /appimage/neovim ]] && mkdir -p /appimage/neovim/
+	mkdir __temp && cd __temp
+
+	echo Downloading neovim appimage
+	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+	chmod u+x nvim.appimage
+
+	echo Installing neovim to /appimage/neovim
+	./nvim.appimage --appimage-extract
+	mv squashfs-root/* /appimage/neovim/
+	ln -s /appimage/neovim/AppRunn /usr/bin/nvim
+
+	cd .. && rm -rf __temp
 }
 
