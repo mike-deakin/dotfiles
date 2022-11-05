@@ -1,5 +1,7 @@
 local dap = require 'dap'
 
+require'dapui'.setup()
+
 vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
 
 require 'dap-vscode-js'.setup {

@@ -47,14 +47,21 @@ return require('packer').startup({ function(use)
     config = function() require 'lsp' end
   }
   use 'weilbith/nvim-code-action-menu' -- lsp code actions in descriptive window
-  use 'nvim-lua/plenary.nvim' -- required for telescope
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
-  use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
-  use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
-  use { 'nvim-treesitter/nvim-treesitter-textobjects' } -- Syntax-aware motions
-  use 'mfussenegger/nvim-dap'
-  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
+  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
+  use 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
   use 'airblade/vim-gitgutter'
+  use { 'ThePrimeagen/refactoring.nvim', config = function () require'refactoring'.setup() end }
+
+  -- Debugging
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use { 'theHamsta/nvim-dap-virtual-text',
+    requires = { "mfussenegger/nvim-dap" },
+    config = function() require 'nvim-dap-virtual-text'.setup({}) end
+  }
+  use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
+  use 'mxsdev/nvim-dap-vscode-js' -- js/ts debugging
 
   use 'Olical/conjure'
 

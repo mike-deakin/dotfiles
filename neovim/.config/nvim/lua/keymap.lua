@@ -1,6 +1,5 @@
 require'leap'.set_default_keymaps()
 -- Helpers stolen from https://github.com/AyeSpacey/Nvimfy/blob/main/lua/keymaps.lua
--- In fact, a lot is stolen from Nvimfy
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
   if opts then options = vim.tbl_extend('force', options, opts) end
@@ -48,6 +47,21 @@ map('n', '<leader>y', '<Plug>(vsnip-select-text)')
 map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
 map('n', '<leader>d', '<Plug>(vsnip-cut-text)')
 map('x', '<leader>d', '<Plug>(vsnip-cut-text)')
+
+-- Refactors
+map(
+	"v",
+	"<leader>rr",
+	"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>"
+)
+map("v", "<leader>re", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
+map("v", "<leader>rf", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
+map("v", "<leader>rv", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
+map("v", "<leader>ri", [[<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+
+map("n", "<leader>rb", [[<Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
+--map("n", "<leader>rbf", [[<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
+map("n", "<leader>ri", [[<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
 
 -- Debugging
 map('n', '<leader>dt', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
