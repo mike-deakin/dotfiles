@@ -3,7 +3,7 @@ vim.opt.termguicolors = true
 local od = require 'onedark'
 od.setup {
     style = 'dark',
-    transparent = false,
+    transparent = true,
     term_colors = false,
     ending_tildes = false,
     highlights = {
@@ -29,6 +29,13 @@ require 'lualine'.setup {
     },
 }
 
+-- Big, smelly hack incoming!
+-- bufferline just copies whatever colors the highlight 'Normal' has
+-- but that looks awful with a transparent background
+-- This sets it to a prettier color first, sets up bufferline, then reverts 'Normal'
+local normal_hl = vim.api.nvim_get_hl_by_name('Normal', true)
+vim.api.nvim_set_hl(0, 'Normal', {bg = '#3b3f4c'})
+
 require 'bufferline'.setup {
     options = {
         buffer_close_icon = '',
@@ -52,6 +59,8 @@ require 'bufferline'.setup {
         },
     },
 }
+
+vim.api.nvim_set_hl(0, 'Normal', normal_hl)
 
 vim.opt.list = true
 vim.opt.listchars:append("eol:⊣")
