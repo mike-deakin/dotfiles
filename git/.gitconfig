@@ -1,4 +1,5 @@
 [alias]
+	recommit = commit --amend --no-edit
 	unstage = reset HEAD --
 	log-pretty = log --oneline --all --graph
 	dv = difftool -t vimdiff -y
@@ -12,7 +13,7 @@
 [merge]
 	tool = nvimdiff
 	conflictstyle = diff3
-[includeIf "gitdir:~/work"]
+[includeIf "gitdir:~/work/**"]
 	path = ~/.gitconfig-work
-[includeIf "gitdir:~/play"]
+[includeIf "gitdir:~/play/**"]
 	path = ~/.gitconfig-play
