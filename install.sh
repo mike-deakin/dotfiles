@@ -10,7 +10,7 @@ install_nvim_plugin_manager () {
 
 install_terminfo () {
 	tic $HERE/terminfo
-	tic -xe tmux-256color $HERE/tmux/tmux.terminfo
+	tic -x $HERE/tmux/tmux.terminfo
 }
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

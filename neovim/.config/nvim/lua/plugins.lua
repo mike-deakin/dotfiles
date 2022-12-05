@@ -51,7 +51,7 @@ return require('packer').startup({ function(use)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
   use 'airblade/vim-gitgutter'
-  use { 'ThePrimeagen/refactoring.nvim', config = function () require'refactoring'.setup() end }
+  use { 'ThePrimeagen/refactoring.nvim', config = function() require 'refactoring'.setup() end }
 
   -- Debugging
   use 'mfussenegger/nvim-dap'
@@ -75,6 +75,9 @@ return require('packer').startup({ function(use)
     'hrsh7th/vim-vsnip',
     'rafamadriz/friendly-snippets',
   }, config = function() require 'cmp-config' end }
+
+  -- Misc
+  use "nullchilly/fsread.nvim" -- "Flow-state" reading. Defocus word endings to make it faster to read
 
   -- Non-plugin packages
   use {

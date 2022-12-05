@@ -14,3 +14,10 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh
+
+eval "$(pyenv init -)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(rbenv init - zsh)"
+
+export PATH="/opt/homebrew/opt/expat/bin:$PATH"
+export EXPAT_DIR="/opt/homebrew/opt/expat"
