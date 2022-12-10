@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 HERE=$(readlink -f $(dirname ${BASH_SOURCE:-$0}))
-USER_HOME=$(getent passwd ${SUDO_USER:-$USER} | cut -d: -f6)
 
 NVIM_AUTOLOAD_DIR="$USER_HOME/.local/share/nvim/site/autoload"
 install_nvim_plugin_manager () {
@@ -15,11 +14,18 @@ install_terminfo () {
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	source install_functions_mac.sh
+	USER_HOME=$(dscl . read /users/${SUDO_USER:-$USER} NFSHomeDirectory | cut -d: -f2)
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	source install_functions_linux.sh
+	USER_HOME=$(getent passwd ${SUDO_USER:-$USER} | cut -d: -f6)
 else
 	echo "Unrecognised OS \"$OSTYPE\"!!"
 	exit 1
+fi
+
+if [ -z $USER_HOME ]; then
+	echo "Unable to determine user home directory. Aborting install."
+	exit 2
 fi
 
 # Update/initialise submodules (Prezto in particular)
