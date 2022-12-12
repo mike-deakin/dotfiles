@@ -4,6 +4,18 @@ install_brew () {
 	echo "brew not available on linux, duh!"
 }
 
+install_font() {
+	curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.0/Hack.zip --output Hack.zip
+	unzip Hack.zip -d /usr/local/share/fonts
+	cp /usr/local/share/fonts/config/fontconfig /etc/fonts/config.d/
+	fc-cache -f -v
+	rm Hack.zip
+}
+
+install_terminal() {
+	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+}
+
 install_zsh () {
 	apt install zsh
 }

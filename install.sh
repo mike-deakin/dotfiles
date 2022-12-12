@@ -14,6 +14,7 @@ install_terminfo () {
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	source install_functions_mac.sh
+	install_brew
 	USER_HOME=$(dscl . read /users/${SUDO_USER:-$USER} NFSHomeDirectory | cut -d: -f2)
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	source install_functions_linux.sh
@@ -30,6 +31,9 @@ fi
 
 # Update/initialise submodules (Prezto in particular)
 git submodule update --init --recursive
+
+install_terminal
+[[ ! -d $USER_HOME/.config/kitty ]] && sudo ln -s $HERE/kitty $USER_HOME/.config/kitty
 
 install_zsh
 echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"

@@ -4,7 +4,6 @@ Powered by zsh|tmux|neovim
 
 ## TODO/FIXME
 
- * [term] Automate nerdfont install. ___Because___ extra symbols/icons are needed for plugins. Currently the install is manual.
  * [nvim] Upgrade move-line.lua to be `<cmd>` friendly ___Because___ `<cmd>` is neater and more performant, but does not understand `'<,'>` marks (intentional, see `:help <Cmd>`)
  * [nvim] Simplify `nvim-dap` config ___Because___ it currently is limited, depends on an extra plugin, and is hard-coded to work with a Parcel application
  * [nvim] Replace `vim-surround` ___Because___ there are some newer alternatives with nicer APIs/key bindings
