@@ -38,6 +38,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<space>do', '<cmd>Telescope diagnostics<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+  buf_set_keymap('n', '<space>g', '<cmd>lua require"format-options".editorconfigLspFormat()<CR>', opts)
 
 end
 
