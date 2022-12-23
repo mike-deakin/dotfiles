@@ -59,8 +59,9 @@ map("v", "<leader>rf", [[<Esc><Cmd>lua require('refactoring').refactor('Extract 
 map("v", "<leader>rv", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
 map("v", "<leader>ri", [[<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
 
+map("n", "<leader>rr", [[<cmd>lua require'telescope'.extensions.refactoring.refactors()<CR>]])
 map("n", "<leader>rb", [[<Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
---map("n", "<leader>rbf", [[<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
+--map("n", "<leader>rB", [[<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
 map("n", "<leader>ri", [[<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
 
 -- Debugging

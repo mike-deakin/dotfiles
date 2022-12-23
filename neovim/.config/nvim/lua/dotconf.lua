@@ -3,7 +3,7 @@ local M = {}
 M.parse = function (path)
   local configFile = io.open(path, "r")
   if configFile == nil then
-    return {}
+    return nil
   end
 
   local section
