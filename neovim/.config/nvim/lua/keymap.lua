@@ -78,6 +78,7 @@ map('n', '<F12>', '<cmd>lua require"dap".step_out()<CR>')
 map('n', '<leader>dr', '<cmd>lua require"dap".repl.open()<CR>')
 map('n', '<leader>dl', '<cmd>lua require"dap".run_last()<CR>')
 map('n', '<leader>dx', '<cmd>lua require"dap".terminate()<CR>')
+map('n', '<leader>de', '<cmd>lua require"dapui".eval(nil, {width = 50, height = 10})<CR>')
 
  -- Line operations
 map('n', '<M-j>', '<cmd>lua require"move-line".moveLineDown()<CR>')

@@ -68,7 +68,7 @@ local servers = {
   clojure_lsp = {},
   tsserver = {},
   elixirls = {
-    cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through dotfiles: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#elixirls
+    cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through Mason
   },
 }
 

@@ -24,6 +24,7 @@ return require('packer').startup({ function(use)
   use 'nvim-telescope/telescope-packer.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
+  use { 'williamboman/mason.nvim', config = function() require'mason'.setup() end }
 
   -- Style
   use 'navarasu/onedark.nvim'
@@ -63,7 +64,6 @@ return require('packer').startup({ function(use)
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
   use { 'theHamsta/nvim-dap-virtual-text',
-    requires = { "mfussenegger/nvim-dap" },
     config = function() require 'nvim-dap-virtual-text'.setup({}) end
   }
   use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
@@ -90,6 +90,10 @@ return require('packer').startup({ function(use)
     "microsoft/vscode-js-debug",
     opt = true,
     run = "npm install --legacy-peer-deps && npm run compile"
+  }
+  use {
+    'Joakker/lua-json5',
+    run = './install.sh'
   }
 
   if packer_bootstrap then
