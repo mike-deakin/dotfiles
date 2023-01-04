@@ -3,6 +3,7 @@ local ts_install = function (language)
 end
 
 local languages = {
+  'query',
   'bash',
   'c',
   'elixir',
@@ -12,6 +13,7 @@ local languages = {
   'javascript',
   'typescript',
   'tsx',
+  'graphql',
   'hcl',
 }
 

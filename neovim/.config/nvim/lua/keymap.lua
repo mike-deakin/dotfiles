@@ -45,8 +45,8 @@ map('i', '<S-Tab>', function()
 end, {expr = true})
 map('n', '<leader>y', '<Plug>(vsnip-select-text)')
 map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
-map('n', '<leader>d', '<Plug>(vsnip-cut-text)')
-map('x', '<leader>d', '<Plug>(vsnip-cut-text)')
+map('n', '<leader>x', '<Plug>(vsnip-cut-text)')
+map('x', '<leader>x', '<Plug>(vsnip-cut-text)')
 
 -- Refactors
 map(

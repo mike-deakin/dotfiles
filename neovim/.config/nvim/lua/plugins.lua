@@ -1,3 +1,10 @@
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -30,7 +37,6 @@ return require('packer').startup({ function(use)
   use { 'jbyuki/instant.nvim', opt = true, cmd = { 'InstantStartSession', 'InstantJoinSession' } }
 
   -- Additional functions
-  use 'tpope/vim-sensible'
   use 'tpope/vim-sleuth' -- auto indent width detection
   use 'tpope/vim-surround' -- surround text with matching character pairs ()[]{}, etc
   use 'tpope/vim-abolish' -- word-related mutations (case, endings, search/replace, etc

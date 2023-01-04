@@ -83,3 +83,7 @@ for lsp, conf in pairs(servers) do
     capabilities = capabilities
   }, conf))
 end
+
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}

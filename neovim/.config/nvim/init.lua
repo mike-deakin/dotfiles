@@ -5,6 +5,7 @@ vim.opt.lazyredraw = true
 vim.opt.number = true
 vim.opt.rnu = true
 vim.opt.cursorline = true
+vim.opt.scrolloff = 20
 vim.opt.mouse = ""
 vim.opt.fileencodings = vim.opt.fileencodings + { 'utf-8' }
 vim.opt.encoding = 'utf-8'
@@ -21,8 +22,6 @@ vim.cmd([[filetype plugin indent on]]) -- auto-indent based on file type
 vim.cmd([[syntax on]])
 vim.opt.completeopt = "menu,menuone,noselect"
 
-vim.g.NERDTreeShowHidden = 1
-vim.g.NERDTreeCustomOpenArgs = {file = {reuse = 'all', where = 'p', keepopen = 0}}
 vim.g.instant_username = 'mdeakin'
 
 require'plugins'
