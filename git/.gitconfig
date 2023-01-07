@@ -2,6 +2,7 @@
 	recommit = commit --amend --no-edit
 	unstage = reset HEAD --
 	log-pretty = log --oneline --all --graph
+	bup = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
 	dv = difftool -t vimdiff -y
 [init]
 	defaultBranch = main
