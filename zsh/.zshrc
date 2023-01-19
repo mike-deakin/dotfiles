@@ -12,11 +12,13 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+unset EXTENDED_GLOB # is set by "directory" module, but breaks some commands (e.g. git reset HEAD^)
+
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh
 
-export PATH="/opt/homebrew/opt/expat/bin:$PATH"
 export EXPAT_DIR="/opt/homebrew/opt/expat"
+export PATH="$EXPAT_DIR/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
