@@ -54,10 +54,6 @@ return require('packer').startup({ function(use)
     requires = { 'hrsh7th/cmp-nvim-lsp' },
     config = function() require 'lsp' end
   }
-  use {
-    "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-  }
   use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' } -- lsp code actions in descriptive window
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
@@ -88,6 +84,12 @@ return require('packer').startup({ function(use)
     'hrsh7th/vim-vsnip',
     'rafamadriz/friendly-snippets',
   }, config = function() require 'cmp-config' end }
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+  use { 'tzachar/cmp-fuzzy-buffer', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
+  use { 'tzachar/cmp-fuzzy-path', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
 
   -- Misc
   use "nullchilly/fsread.nvim" -- "Flow-state" reading. Defocus word endings to make it faster to read
