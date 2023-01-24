@@ -37,12 +37,6 @@ map('n', '<leader>bo', ':%bd|e#<CR>') -- Delete all other open buffers
 map('n', '<leader>bd', ':bd<CR>') -- Delete current buffer
 
 -- Snippets
-map('i', '<Tab>', function()
-	return vim.fn['vsnip#available'](1) == 1 and '<Plug>(vsnip-jump-next)' or '<Tab>'
-end, { expr = true })
-map('i', '<S-Tab>', function()
-	return vim.fn['vsnip#available'](-1) == 1 and '<Plug>(vsnip-jump-next)' or '<S-Tab>'
-end, { expr = true })
 map('n', '<leader>y', '<Plug>(vsnip-select-text)')
 map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
 map('n', '<leader>x', '<Plug>(vsnip-cut-text)')
