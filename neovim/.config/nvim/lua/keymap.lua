@@ -1,23 +1,23 @@
-require'leap'.set_default_keymaps()
+require 'leap'.set_default_keymaps()
 -- Helpers stolen from https://github.com/AyeSpacey/Nvimfy/blob/main/lua/keymaps.lua
 local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true}
-  if opts then options = vim.tbl_extend('force', options, opts) end
-  vim.keymap.set(mode, lhs, rhs, options)
+	local options = { noremap = true }
+	if opts then options = vim.tbl_extend('force', options, opts) end
+	vim.keymap.set(mode, lhs, rhs, options)
 end
 
 local cmd = vim.cmd
 
- -- QoL Hacks
-map({'n', 'v'}, ';', ':') -- One-touch commands
+-- QoL Hacks
+map({ 'n', 'v' }, ';', ':') -- One-touch commands
 map('n', '<C-s>', ':w<CR>') -- Save for normal humans
 map('v', '<C-c>', '"+y') -- Copy to OS clipboard
 
- -- Quickfix list navigation
+-- Quickfix list navigation
 map('n', '<C-j>', ':cnext<CR>')
 map('n', '<C-k>', ':cprev<CR>')
 
- -- Files and navigation
+-- Files and navigation
 map('n', '<F2>', '<cmd>NvimTreeToggle<CR>')
 map('n', '<F3>', '<cmd>NvimTreeFindFileToggle<CR>')
 map('n', '<leader>fa', '<cmd>Telescope<CR>')
@@ -30,39 +30,46 @@ map('n', '<leader>fc', '<cmd>Telescope commands<CR>')
 map('n', '<leader>f?', '<cmd>lua require"telescope.builtin".help_tags()<CR>')
 map('n', '<leader>g', '<cmd>lua require"telescope.builtin".grep_string()<CR>')
 
- -- Window/Buffer management
+-- Window/Buffer management
 map('n', '<leader>B', '<cmd>BufferLinePick<CR>')
 map('n', '<leader>ba', ':%bd<CR>') -- Delete all open buffers
 map('n', '<leader>bo', ':%bd|e#<CR>') -- Delete all other open buffers
 map('n', '<leader>bd', ':bd<CR>') -- Delete current buffer
 
- -- Snippets
+-- Snippets
 map('i', '<Tab>', function()
-    return vim.fn['vsnip#available'](1) == 1 and '<Plug>(vsnip-jump-next)' or '<Tab>'
-end, {expr = true})
+	return vim.fn['vsnip#available'](1) == 1 and '<Plug>(vsnip-jump-next)' or '<Tab>'
+end, { expr = true })
 map('i', '<S-Tab>', function()
-    return vim.fn['vsnip#available'](-1) == 1 and '<Plug>(vsnip-jump-next)' or '<S-Tab>'
-end, {expr = true})
+	return vim.fn['vsnip#available'](-1) == 1 and '<Plug>(vsnip-jump-next)' or '<S-Tab>'
+end, { expr = true })
 map('n', '<leader>y', '<Plug>(vsnip-select-text)')
 map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
 map('n', '<leader>x', '<Plug>(vsnip-cut-text)')
 map('x', '<leader>x', '<Plug>(vsnip-cut-text)')
 
 -- Refactors
+map('n', '<leader>na', '<cmd>lua require"ts-node-action".node_action()<CR>')
 map(
 	"v",
 	"<leader>rr",
 	"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>"
 )
-map("v", "<leader>re", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
-map("v", "<leader>rf", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
-map("v", "<leader>rv", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
-map("v", "<leader>ri", [[<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+map("v", "<leader>re", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+	{ noremap = true, silent = true, expr = false })
+map("v", "<leader>rf", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+	{ noremap = true, silent = true, expr = false })
+map("v", "<leader>rv", [[<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false })
+map("v", "<leader>ri", [[<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false })
 
 map("n", "<leader>rr", [[<cmd>lua require'telescope'.extensions.refactoring.refactors()<CR>]])
-map("n", "<leader>rb", [[<Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
+map("n", "<leader>rb", [[<Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
+	{ noremap = true, silent = true, expr = false })
 --map("n", "<leader>rB", [[<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
-map("n", "<leader>ri", [[<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+map("n", "<leader>ri", [[<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false })
 
 -- Debugging
 map('n', '<leader>dt', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
@@ -80,7 +87,37 @@ map('n', '<leader>dl', '<cmd>lua require"dap".run_last()<CR>')
 map('n', '<leader>dx', '<cmd>lua require"dap".terminate()<CR>')
 map('n', '<leader>de', '<cmd>lua require"dapui".eval(nil, {width = 50, height = 10})<CR>')
 
- -- Line operations
+-- Treesitter functions
+-- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
+vim.keymap.set("n", "vU", function()
+	vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+vim.keymap.set("n", "vD", function()
+	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+
+-- Swap Current Node at the Cursor with it's siblings, Dot Repeatable
+vim.keymap.set("n", "vd", function()
+	vim.opt.opfunc = "v:lua.STSSwapCurrentNodeNextNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+vim.keymap.set("n", "vu", function()
+	vim.opt.opfunc = "v:lua.STSSwapCurrentNodePrevNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+
+map("n", "vx", '<cmd>STSSelectMasterNode<cr>')
+map("n", "vn", '<cmd>STSSelectCurrentNode<cr>')
+map("x", "J", '<cmd>STSSelectNextSiblingNode<cr>')
+map("x", "K", '<cmd>STSSelectPrevSiblingNode<cr>')
+map("x", "H", '<cmd>STSSelectParentNode<cr>')
+map("x", "L", '<cmd>STSSelectChildNode<cr>')
+map("x", "<A-j>", '<cmd>STSSwapNextVisual<cr>')
+map("x", "<A-k>", '<cmd>STSSwapPrevVisual<cr>')
+
+-- Line operations
 map('n', '<M-j>', '<cmd>lua require"move-line".moveLineDown()<CR>')
 map('n', '∆', '<cmd>lua require"move-line".moveLineDown()<CR>') -- ∆ == option+j
 map('n', '<M-k>', '<cmd>lua require"move-line".moveLineUp()<CR>')
@@ -90,16 +127,16 @@ map('x', '∆', ':<C-u>lua require"move-line".moveLinesDown()<CR>') -- ∆ == op
 map('x', '<M-k>', ':<C-u>lua require"move-line".moveLinesUp()<CR>')
 map('x', '˚', ':<C-u>lua require"move-line".moveLinesUp()<CR>') -- ˚ == option+k
 
- -- Duplicate line 
+-- Duplicate line
 map('n', '∂', '"dY"dp') -- ∂ == option+d
 map('n', '<M-d>', '"dY"dp')
 
- -- Duplicate line down
+-- Duplicate line down
 map('n', 'Ô', '"dY"dp') -- Ô == option+shift+j
 map('n', '<S-M-j>', '"dY"dp') -- Ô == option+shift+j
- -- Duplicate line up
+-- Duplicate line up
 map('n', '', '"dY"dP') --  == option+shift+k
 map('n', '<S-M-k>', '"dY"dP') --  == option+shift+k
 
- -- Custom Commands
+-- Custom Commands
 cmd("command! RSource source $MYVIMRC") -- (R)e-(Source) init.vim

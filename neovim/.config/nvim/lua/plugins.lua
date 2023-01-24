@@ -29,6 +29,7 @@ return require('packer').startup({ function(use)
   -- Style
   use 'navarasu/onedark.nvim'
   use 'nvim-lualine/lualine.nvim'
+  use 'lukas-reineke/indent-blankline.nvim' -- Show indentation levels
   use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons' }
 
   -- file browser
@@ -42,11 +43,11 @@ return require('packer').startup({ function(use)
   use 'tpope/vim-surround' -- surround text with matching character pairs ()[]{}, etc
   use 'tpope/vim-abolish' -- word-related mutations (case, endings, search/replace, etc
   use 'chaoren/vim-wordmotion' -- camel-case word motions
-  use 'lukas-reineke/indent-blankline.nvim' -- Show indentation levels
   use 'scrooloose/nerdcommenter'
   use 'ggandor/leap.nvim' -- label-based navigation (like vimium)
   use { 'nat-418/boole.nvim', config = function() require 'boole-config' end }
   use { "smjonas/live-command.nvim", config = function() require 'live-command-config' end }
+  use 'neomake/neomake'
 
   -- IDEA-like stuff
   use { 'neovim/nvim-lspconfig', -- https://github.com/neovim/nvim-lspconfig
@@ -57,6 +58,8 @@ return require('packer').startup({ function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
+  use 'ziontee113/syntax-tree-surfer' -- Syntax-aware motions
+  use 'ckolkey/ts-node-action'
   use 'airblade/vim-gitgutter'
   use { 'ThePrimeagen/refactoring.nvim', config = function() require 'refactoring'.setup() end }
 
