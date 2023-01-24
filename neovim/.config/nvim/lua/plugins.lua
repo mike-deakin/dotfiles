@@ -24,7 +24,7 @@ return require('packer').startup({ function(use)
   use 'nvim-telescope/telescope-packer.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
-  use { 'williamboman/mason.nvim', config = function() require'mason'.setup() end }
+  use { 'williamboman/mason.nvim', config = function() require 'mason'.setup() end }
 
   -- Style
   use 'navarasu/onedark.nvim'
@@ -53,6 +53,10 @@ return require('packer').startup({ function(use)
   use { 'neovim/nvim-lspconfig', -- https://github.com/neovim/nvim-lspconfig
     requires = { 'hrsh7th/cmp-nvim-lsp' },
     config = function() require 'lsp' end
+  }
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
   }
   use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' } -- lsp code actions in descriptive window
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
