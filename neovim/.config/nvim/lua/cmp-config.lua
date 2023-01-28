@@ -19,9 +19,9 @@ if cmp ~= nil then
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
       { name = 'vsnip' },
       { name = 'fuzzy_buffer' },
-      { name = 'fuzzy_path' },
     }, { { name = 'buffer' } }),
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
