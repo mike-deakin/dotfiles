@@ -20,8 +20,8 @@ unset EXTENDED_GLOB # is set by "directory" module, but breaks some commands (e.
 export EXPAT_DIR="/opt/homebrew/opt/expat"
 export PATH="$EXPAT_DIR/bin:$PATH"
 
-eval "$(pyenv init -)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(pyenv init -)"
 eval "$(rbenv init - zsh)"
 
 autoload -U add-zsh-hook
