@@ -17,12 +17,19 @@ unset EXTENDED_GLOB # is set by "directory" module, but breaks some commands (e.
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh
 
-export EXPAT_DIR="/opt/homebrew/opt/expat"
-export PATH="$EXPAT_DIR/bin:$PATH"
+if [[ $(uname) == "Darwin "]]; then
+  export EXPAT_DIR="/opt/homebrew/opt/expat"
+  export PATH="$EXPAT_DIR/bin:$PATH"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(pyenv init -)"
-eval "$(rbenv init - zsh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+if command -v pyenv > /dev/null; then
+  eval "$(pyenv init -)"
+fi
+if command -v rbenv > /dev/null; then
+  eval "$(rbenv init - zsh)"
+fi
 
 autoload -U add-zsh-hook
 load-nvmrc() {
