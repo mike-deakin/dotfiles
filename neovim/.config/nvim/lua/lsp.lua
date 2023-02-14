@@ -7,6 +7,7 @@ local merge = require('merge')
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Enable completion triggered by <c-x><c-o>
@@ -38,8 +39,8 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<space>do', '<cmd>Telescope diagnostics<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua require"format-options".editorconfigLspFormat({async = true})<CR>', opts)
-  buf_set_keymap('n', '<space>oi', '<cmd>lua vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})<CR>', opts)
-
+  buf_set_keymap('n', '<space>oi',
+    '<cmd>lua vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})<CR>', opts)
 end
 
 -- cmp completions
@@ -69,6 +70,16 @@ local servers = {
   tsserver = {},
   elixirls = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through Mason
+  },
+  yamlls = {
+    settings = {
+      yaml = {
+        schemas = {
+          ["https://json.schemastore.org/circleciconfig.json"] = "/.circleci/*",
+          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+        }
+      }
+    }
   },
 }
 

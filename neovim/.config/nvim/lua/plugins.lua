@@ -62,6 +62,16 @@ return require('packer').startup({ function(use)
   use 'ckolkey/ts-node-action'
   use 'airblade/vim-gitgutter'
   use { 'ThePrimeagen/refactoring.nvim', config = function() require 'refactoring'.setup() end }
+  use {
+    'ldelossa/gh.nvim',
+    --opt = true,
+    --cmd = { 'GHStartReview', 'GHSearchPRs', 'GHRequestedReview' },
+    requires = { { 'ldelossa/litee.nvim' } },
+    config = function()
+      require('litee.lib').setup()
+      require('litee.gh').setup()
+    end
+  }
 
   -- Debugging
   use 'mfussenegger/nvim-dap'

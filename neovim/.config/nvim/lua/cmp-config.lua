@@ -17,6 +17,9 @@ if cmp ~= nil then
         vim.fn["vsnip#anonymous"](args.body)
       end
     },
+    view = {
+      entries = { name = 'custom', selection_order = 'near_cursor' }
+    },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },
