@@ -17,7 +17,7 @@ unset EXTENDED_GLOB # is set by "directory" module, but breaks some commands (e.
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh
 
-if [[ $(uname) == "Darwin "]]; then
+if [[ "$(uname)" == "Darwin" ]] then
   export EXPAT_DIR="/opt/homebrew/opt/expat"
   export PATH="$EXPAT_DIR/bin:$PATH"
 
