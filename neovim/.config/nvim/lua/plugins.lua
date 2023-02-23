@@ -24,7 +24,7 @@ return require('packer').startup({ function(use)
   use 'nvim-telescope/telescope-packer.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
-  use { 'williamboman/mason.nvim', config = function() require 'mason'.setup() end }
+  use { 'williamboman/mason.nvim', config = function() require 'mason'.setup() end, opt = true, cmd = { 'Mason', 'MasonInstall' } }
 
   -- Style
   use 'navarasu/onedark.nvim'
@@ -54,18 +54,17 @@ return require('packer').startup({ function(use)
     requires = { 'hrsh7th/cmp-nvim-lsp' },
     config = function() require 'lsp' end
   }
-  use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' } -- lsp code actions in descriptive window
+  use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' } -- lsp code actions in descriptive window
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
   use 'ziontee113/syntax-tree-surfer' -- Syntax-aware motions
   use 'ckolkey/ts-node-action'
   use 'airblade/vim-gitgutter'
-  use { 'ThePrimeagen/refactoring.nvim', config = function() require 'refactoring'.setup() end }
   use {
     'ldelossa/gh.nvim',
-    --opt = true,
-    --cmd = { 'GHStartReview', 'GHSearchPRs', 'GHRequestedReview' },
+    opt = true,
+    cmd = { 'GHStartReview', 'GHSearchPRs', 'GHRequestedReview' },
     requires = { { 'ldelossa/litee.nvim' } },
     config = function()
       require('litee.lib').setup()
@@ -103,7 +102,7 @@ return require('packer').startup({ function(use)
   use { 'tzachar/cmp-fuzzy-path', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
 
   -- Misc
-  use "nullchilly/fsread.nvim" -- "Flow-state" reading. Defocus word endings to make it faster to read
+  use { "nullchilly/fsread.nvim", opt = true, cmd = { 'FSRead', 'FSToggle' } } -- "Flow-state" reading. Defocus word endings to make it faster to read
 
   -- Non-plugin packages
   use {

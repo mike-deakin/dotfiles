@@ -49,7 +49,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#
 -- append items from this list to the above url to see docs
 local servers = {
-  sumneko_lua = {
+  lua_ls = {
     settings = {
       Lua = {
         runtime = {

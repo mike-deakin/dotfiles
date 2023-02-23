@@ -3,4 +3,4 @@ tmux|tmux terminal multiplexer,
     use=xterm, use=screen,
 
 tmux-256color|tmux with 256 colors,
-    use=xterm-256color, use=tmux,
+    use=xterm-256color, use=tmux, use=xterm-kitty,

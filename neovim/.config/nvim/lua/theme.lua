@@ -62,10 +62,19 @@ require 'bufferline'.setup {
 
 vim.api.nvim_set_hl(0, 'Normal', normal_hl)
 
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {link = 'Whitespace'})
+vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', {link = 'Whitespace'})
+vim.api.nvim_set_hl(0, 'IndentBlanklineContext', {fg = '#98c379', nocombine = true})
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', {fg = '#98c379', nocombine = true})
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextSpaceChar', {fg = '#98c379', nocombine = true})
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', {sp = '#98c379', underline = true})
 vim.opt.list = true
 vim.opt.listchars:append("eol:⊣")
 require("indent_blankline").setup {
     char = '┊',
+    context_char = '🭰',
     use_treesitter = true,
     show_end_of_line = true,
+    show_current_context = true,
+    show_current_context_start = true,
 }
