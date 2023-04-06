@@ -7,35 +7,80 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local cmd = vim.cmd
+local ck = require 'caskey'
+
+ck.setup({
+	{
+		['<C-s>'] = { act = ck.cmd 'w', desc = 'Save for normal humans', mode = 'n' },
+		['<C-c>'] = { act = '"+y', desc = 'Copy to OS clipboard', mode = 'v' },
+	},
+	{
+		name = 'NvimTree',
+		mode = 'n',
+		['<F2>'] = { act = ck.cmd 'NvimTreeToggle', desc = 'Toggle file tree' },
+		['<F3>'] = { act = ck.cmd 'NvimTreeFindFileToggle', desc = 'Toggle file tree, jump to current file' },
+	},
+	{
+		mode = 'n',
+		name = 'Quickfix',
+		desc = 'Quickfix list navigation',
+		['<C-j>'] = { act = ck.cmd 'cnext' },
+		['<C-k>'] = { act = ck.cmd 'cprev' },
+	},
+	['<leader>'] = {
+		mode = 'n',
+		['b'] = {
+			desc = 'Buffer management',
+			['b'] = { act = ck.cmd 'BufferLinePick' },
+			['d'] = { act = ck.cmd 'bd', desc = 'Delete current' },
+			['a'] = { act = ck.cmd '%bd|e#', desc = 'Delete all' },
+			['o'] = { act = ck.cmd '%bd', desc = 'Delete others' },
+		},
+		['f'] = function()
+			local tb = require 'telescope.builtin'
+
+			return {
+				name = 'Telescope',
+				desc = 'Fuzzy-finder',
+				['f'] = { act = tb.git_files },
+				['o'] = { act = function() tb.git_files({ others = true }) end },
+				['h'] = { act = function() tb.find_files({ hidden = true }) end },
+				['g'] = { act = tb.live_grep },
+				['b'] = { act = tb.buffers },
+				['k'] = { act = tb.keymaps },
+				['c'] = { act = tb.comands },
+				['?'] = { act = tb.help_tags },
+			}
+		end,
+		['g'] = {
+			desc = 'Grep string in buffer',
+			act = function() require 'telescope.builtin'.grep_string() end
+		},
+		['d'] = function()
+			local dap = require 'dap'
+
+			return {
+				desc = 'Debugger (DAP)',
+				['t'] = { act = dap.toggle_breakpoint, desc = 'Toggle breakpoint' },
+				['c'] = { act = function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = 'Set contitional breakpoint'},
+				['d'] = { act = dap.continue, desc = 'Continue' },
+				['o'] = { act = dap.step_over, desc = 'Step over'},
+				['i'] = { act = dap.step_into, desc = 'Step into'},
+				['u'] = { act = dap.step_out, desc = 'Step out (think "up")'},
+				['r'] = { act = dap.repl.open, desc = 'Open REPL'},
+				['l'] = { act = dap.run_last, desc = 'Run last'},
+				['x'] = { act = dap.terminate, desc = 'Terminate debug connection'},
+			}
+		end,
+		['na'] = {
+			act = require'ts-node-action'.node_action,
+			desc = 'TreeSitter node action',
+		},
+	},
+})
 
 -- QoL Hacks
-map({ 'n', 'v' }, ';', ':') -- One-touch commands
-map('n', '<C-s>', ':w<CR>') -- Save for normal humans
-map('v', '<C-c>', '"+y') -- Copy to OS clipboard
-
--- Quickfix list navigation
-map('n', '<C-j>', ':cnext<CR>')
-map('n', '<C-k>', ':cprev<CR>')
-
--- Files and navigation
-map('n', '<F2>', '<cmd>NvimTreeToggle<CR>')
-map('n', '<F3>', '<cmd>NvimTreeFindFileToggle<CR>')
-map('n', '<leader>fa', '<cmd>Telescope<CR>')
-map('n', '<leader>ff', '<cmd>lua require"telescope-config".project_files()<CR>')
-map('n', '<leader>fh', '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<CR>')
-map('n', '<leader>fg', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
-map('n', '<leader>fb', '<cmd>Telescope buffers<CR>')
-map('n', '<leader>fk', '<cmd>Telescope keymaps<CR>')
-map('n', '<leader>fc', '<cmd>Telescope commands<CR>')
-map('n', '<leader>f?', '<cmd>lua require"telescope.builtin".help_tags()<CR>')
-map('n', '<leader>g', '<cmd>lua require"telescope.builtin".grep_string()<CR>')
-
--- Window/Buffer management
-map('n', '<leader>B', '<cmd>BufferLinePick<CR>')
-map('n', '<leader>ba', ':%bd<CR>') -- Delete all open buffers
-map('n', '<leader>bo', ':%bd|e#<CR>') -- Delete all other open buffers
-map('n', '<leader>bd', ':bd<CR>') -- Delete current buffer
-
+map({ 'n', 'v' }, ';', ':') -- One-touch comands
 -- Snippets
 map('n', '<leader>y', '<Plug>(vsnip-select-text)')
 map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
@@ -46,19 +91,6 @@ map('x', '<leader>x', '<Plug>(vsnip-cut-text)')
 map('n', '<leader>na', '<cmd>lua require"ts-node-action".node_action()<CR>')
 
 -- Debugging
-map('n', '<leader>dt', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
-map('n', '<leader>dc', '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>')
-map('n', '<leader>dd', '<cmd>lua require"dap".continue()<CR>')
-map('n', '<F5>', '<cmd>lua require"dap".continue()<CR>')
-map('n', '<leader>do', '<cmd>lua require"dap".step_over()<CR>')
-map('n', '<F10>', '<cmd>lua require"dap".step_over()<CR>')
-map('n', '<leader>di', '<cmd>lua require"dap".step_into()<CR>')
-map('n', '<F11>', '<cmd>lua require"dap".step_into()<CR>')
-map('n', '<leader>du', '<cmd>lua require"dap".step_out()<CR>') -- Think step "up"
-map('n', '<F12>', '<cmd>lua require"dap".step_out()<CR>')
-map('n', '<leader>dr', '<cmd>lua require"dap".repl.open()<CR>')
-map('n', '<leader>dl', '<cmd>lua require"dap".run_last()<CR>')
-map('n', '<leader>dx', '<cmd>lua require"dap".terminate()<CR>')
 map('n', '<leader>de', '<cmd>lua require"dapui".eval(nil, {width = 50, height = 10})<CR>')
 
 -- Treesitter functions
@@ -95,21 +127,21 @@ map("x", "<A-k>", '<cmd>STSSwapPrevVisual<cr>')
 map('n', '<M-j>', '<cmd>lua require"move-line".moveLineDown()<CR>')
 map('n', '∆', '<cmd>lua require"move-line".moveLineDown()<CR>') -- ∆ == option+j
 map('n', '<M-k>', '<cmd>lua require"move-line".moveLineUp()<CR>')
-map('n', '˚', '<cmd>lua require"move-line".moveLineUp()<CR>') -- ˚ == option+k
+map('n', '˚', '<cmd>lua require"move-line".moveLineUp()<CR>')    -- ˚ == option+k
 map('x', '<M-j>', ':<C-u>lua require"move-line".moveLinesDown()<CR>')
 map('x', '∆', ':<C-u>lua require"move-line".moveLinesDown()<CR>') -- ∆ == option+j
 map('x', '<M-k>', ':<C-u>lua require"move-line".moveLinesUp()<CR>')
-map('x', '˚', ':<C-u>lua require"move-line".moveLinesUp()<CR>') -- ˚ == option+k
+map('x', '˚', ':<C-u>lua require"move-line".moveLinesUp()<CR>')  -- ˚ == option+k
 
 -- Duplicate line
 map('n', '∂', '"dY"dp') -- ∂ == option+d
 map('n', '<M-d>', '"dY"dp')
 
 -- Duplicate line down
-map('n', 'Ô', '"dY"dp') -- Ô == option+shift+j
+map('n', 'Ô', '"dY"dp')      -- Ô == option+shift+j
 map('n', '<S-M-j>', '"dY"dp') -- Ô == option+shift+j
 -- Duplicate line up
-map('n', '', '"dY"dP') --  == option+shift+k
+map('n', '', '"dY"dP')     --  == option+shift+k
 map('n', '<S-M-k>', '"dY"dP') --  == option+shift+k
 
 -- Custom Commands

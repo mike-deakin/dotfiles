@@ -61,7 +61,7 @@ local servers = {
     }
   },
   pylsp = {},
-  clojure_lsp = {},
+  --clojure_lsp = {},
   tsserver = {},
   elixirls = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through Mason

@@ -25,7 +25,14 @@ return require('packer').startup({
     use 'nvim-telescope/telescope-packer.nvim'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
-    use { 'williamboman/mason.nvim', config = function() require 'mason'.setup() end, opt = true, cmd = { 'Mason', 'MasonInstall' } }
+    use { 'williamboman/mason.nvim', config = function() require 'mason'.setup() end, opt = true, cmd = { 'Mason',
+      'MasonInstall' } }
+    use {
+      "Nexmean/caskey.nvim",
+      requires = {
+        "folke/which-key.nvim", -- optional, only if you want which-key integration
+      },
+    }
 
     -- Style
     use 'navarasu/onedark.nvim'
@@ -40,12 +47,12 @@ return require('packer').startup({
     use { 'jbyuki/instant.nvim', opt = true, cmd = { 'InstantStartSession', 'InstantJoinSession' } }
 
     -- Additional functions
-    use 'tpope/vim-sleuth' -- auto indent width detection
-    use 'tpope/vim-surround' -- surround text with matching character pairs ()[]{}, etc
+    use 'tpope/vim-sleuth'                                                  -- auto indent width detection
+    use 'tpope/vim-surround'                                                -- surround text with matching character pairs ()[]{}, etc
     use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } } -- word-related mutations (case, endings, search/replace, etc
-    use 'chaoren/vim-wordmotion' -- camel-case word motions
+    use 'chaoren/vim-wordmotion'                                            -- camel-case word motions
     use 'scrooloose/nerdcommenter'
-    use 'ggandor/leap.nvim' -- label-based navigation (like vimium)
+    use 'ggandor/leap.nvim'                                                 -- label-based navigation (like vimium)
     use { 'nat-418/boole.nvim', config = function() require 'boole-config' end }
     use {
       "smjonas/live-command.nvim",
@@ -62,11 +69,11 @@ return require('packer').startup({
       requires = { 'hrsh7th/cmp-nvim-lsp' },
       config = function() require 'lsp' end
     }
-    use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' } -- lsp code actions in descriptive window
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- fzf-style matching for telescope
+    use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' }    -- lsp code actions in descriptive window
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                -- fzf-style matching for telescope
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
-    use 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
-    use 'ziontee113/syntax-tree-surfer' -- Syntax-aware motions
+    use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Syntax-aware motions
+    use 'ziontee113/syntax-tree-surfer'                                             -- Syntax-aware motions
     use 'ckolkey/ts-node-action'
     use 'airblade/vim-gitgutter'
     use {
@@ -92,7 +99,7 @@ return require('packer').startup({
       config = function() require 'nvim-dap-virtual-text'.setup({}) end
     }
     use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
-    use 'mxsdev/nvim-dap-vscode-js' -- js/ts debugging
+    use 'mxsdev/nvim-dap-vscode-js'         -- js/ts debugging
 
     --use 'Olical/conjure'
 
