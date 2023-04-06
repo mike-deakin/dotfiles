@@ -4,6 +4,7 @@
 	log-pretty = log --oneline --all --graph
 	bup = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
 	dv = difftool -t vimdiff -y
+	bclean = "!git branch -vv | rg ': gone]' | rg -v '\\*' | awk '{ print $1 }' | xargs -r git branch -D"
 [init]
 	defaultBranch = main
 [core]
