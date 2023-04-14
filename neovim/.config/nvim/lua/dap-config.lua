@@ -2,7 +2,6 @@ local dap = require 'dap'
 local dapui = require'dapui'
 local dapext = require 'dap.ext.vscode'
 require 'dap-vscode-js'.setup({
-  debugger_cmd = { "js-debug-adapter" },
   adapters = { 'pwa-node' }
 })
 

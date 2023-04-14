@@ -31,6 +31,11 @@ if command -v rbenv > /dev/null; then
   eval "$(rbenv init - zsh)"
 fi
 
+if command -v go > /dev/null; then
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOPATH/bin
+fi
+
 autoload -U add-zsh-hook
 load-nvmrc() {
   local nvmrc_path="$(nvm_find_nvmrc)"

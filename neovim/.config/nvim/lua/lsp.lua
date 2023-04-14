@@ -3,39 +3,55 @@
 local nvim_lsp = require('lspconfig')
 local merge = require('merge')
 
+local function preview_location_callback(_, result, method)
+  if result == nil or vim.tbl_isempty(result) then
+    vim.lsp.log.info(method, 'No location found')
+    return nil
+  end
+  if vim.tbl_islist(result) then
+    vim.lsp.util.preview_location(result[1])
+  else
+    vim.lsp.util.preview_location(result)
+  end
+end
+
+local function peek_definition()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+local on_attach = function(client, bufnr)
+  client.server_capabilities.semanticTokensProvider = nil
 
   -- Mappings.
-  local opts = { noremap = true, silent = true }
+  local opts = { noremap = true, silent = true, buffer = bufnr }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  buf_set_keymap('n', 'gs', '<cmd>Telescope lsp_document_symbols<CR>', opts)
-  buf_set_keymap('n', 'gS', '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
-  buf_set_keymap('n', '<C-h>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('i', '<C-h>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<C-y>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('i', '<C-y>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>Telescope lsp_type_definitions<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>CodeActionMenu<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  buf_set_keymap('n', '<space>do', '<cmd>Telescope diagnostics<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua require"format-options".editorconfigLspFormat({async = true})<CR>', opts)
-  buf_set_keymap('n', '<space>oi',
-    '<cmd>lua vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})<CR>', opts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+  vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+  vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+  vim.keymap.set('n', 'gs', '<cmd>Telescope lsp_document_symbols<CR>', opts)
+  vim.keymap.set('n', 'gS', '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
+  vim.keymap.set({ 'n', 'i' }, '<C-h>', vim.lsp.buf.hover, opts)
+  vim.keymap.set({ 'n', 'i' }, '<C-y>', vim.lsp.buf.signature_help, opts)
+  vim.keymap.set({ 'n', 'i' }, '<C-d>', peek_definition, opts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.keymap.set('n', '<space>D', '<cmd>Telescope lsp_type_definitions<CR>', opts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+  vim.keymap.set('n', '<space>ca', '<cmd>CodeActionMenu<CR>', opts)
+  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+  vim.keymap.set('n', '<space>do', '<cmd>Telescope diagnostics<CR>', opts)
+  vim.keymap.set('n', '<space>f', function() require "format-options".editorconfigLspFormat({ async = true }) end, opts)
+  vim.keymap.set('n', '<space>oi',
+    function() vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true }) end, opts)
 end
 
 -- cmp completions
@@ -63,6 +79,7 @@ local servers = {
   pylsp = {},
   --clojure_lsp = {},
   tsserver = {},
+  gopls = {},
   elixirls = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through Mason
   },
