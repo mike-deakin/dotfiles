@@ -25,14 +25,7 @@ return require('packer').startup({
     use 'nvim-telescope/telescope-packer.nvim'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
-    use { 'williamboman/mason.nvim', config = function() require 'mason'.setup() end, opt = true, cmd = { 'Mason',
-      'MasonInstall' } }
-    use {
-      "Nexmean/caskey.nvim",
-      requires = {
-        "folke/which-key.nvim", -- optional, only if you want which-key integration
-      },
-    }
+    use { "Nexmean/caskey.nvim" } -- Group-based keymap configuration syntax
 
     -- Style
     use 'navarasu/onedark.nvim'
@@ -41,19 +34,29 @@ return require('packer').startup({
     use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons' }
 
     -- file browser
-    use { 'nvim-tree/nvim-tree.lua', requires = 'nvim-tree/nvim-web-devicons' }
+    use {
+      'nvim-tree/nvim-tree.lua',
+      cmd = 'NvimTree*',
+      requires = 'nvim-tree/nvim-web-devicons',
+      config = function()
+        -- disable netrw
+        vim.g.loaded = 1
+        vim.g.loaded_netrwPlugin = 1
+        require 'nvim-tree'.setup()
+      end
+    }
 
     -- remote pairing
     use { 'jbyuki/instant.nvim', opt = true, cmd = { 'InstantStartSession', 'InstantJoinSession' } }
 
     -- Additional functions
-    use 'tpope/vim-sleuth'                                                  -- auto indent width detection
-    use 'tpope/vim-surround'                                                -- surround text with matching character pairs ()[]{}, etc
-    use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } } -- word-related mutations (case, endings, search/replace, etc
-    use 'chaoren/vim-wordmotion'                                            -- camel-case word motions
+    use 'tpope/vim-sleuth'                                                       -- auto indent width detection
+    use 'tpope/vim-surround'                                                     -- surround text with matching character pairs ()[]{}, etc
+    use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } }      -- word-related mutations (case, endings, search/replace, etc
+    use 'chaoren/vim-wordmotion'                                                 -- camel-case word motions
     use 'scrooloose/nerdcommenter'
-    use 'ggandor/leap.nvim'                                                 -- label-based navigation (like vimium)
-    use { 'nat-418/boole.nvim', config = function() require 'boole-config' end }
+    use 'ggandor/leap.nvim'                                                      -- label-based navigation (like vimium)
+    use { 'nat-418/boole.nvim', config = function() require 'boole-config' end } -- Better increment/decrement functions
     use {
       "smjonas/live-command.nvim",
       opt = true,
@@ -62,11 +65,13 @@ return require('packer').startup({
         require 'live-command-config'
       end
     }
-    use { 'neomake/neomake', opt = true, cmd = 'NeoMake' }
 
     -- IDEA-like stuff
     use { 'neovim/nvim-lspconfig', -- https://github.com/neovim/nvim-lspconfig
-      requires = { 'hrsh7th/cmp-nvim-lsp' },
+      requires = {
+        'hrsh7th/cmp-nvim-lsp',
+        'Issafalcon/lsp-overloads.nvim',
+      },
       config = function() require 'lsp' end
     }
     use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' }    -- lsp code actions in descriptive window
@@ -77,6 +82,18 @@ return require('packer').startup({
     use 'ckolkey/ts-node-action'
     use 'airblade/vim-gitgutter'
     use 'f-person/git-blame.nvim'
+    use {
+      'nvim-neotest/neotest',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-treesitter/nvim-treesitter',
+        'antoinemadec/FixCursorHold.nvim',
+        'haydenmeade/neotest-jest',
+      },
+      config = function()
+        require 'neotest-config'
+      end
+    }
     use {
       'pwntester/octo.nvim',
       requires = {
@@ -94,15 +111,18 @@ return require('packer').startup({
     }
 
     -- Debugging
-    use 'mfussenegger/nvim-dap'
-    use 'rcarriga/nvim-dap-ui'
+    use { 'mfussenegger/nvim-dap' }
+    use { 'rcarriga/nvim-dap-ui' }
     use { 'theHamsta/nvim-dap-virtual-text',
       config = function() require 'nvim-dap-virtual-text'.setup({}) end
     }
     use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
-    use 'mxsdev/nvim-dap-vscode-js'         -- js/ts debugging
-
-    --use 'Olical/conjure'
+    use { 'mxsdev/nvim-dap-vscode-js',
+      requires = {
+        "microsoft/vscode-js-debug",
+        run = "npm install --legacy-peer-deps && npm run compile"
+      }
+    }
 
     -- Completions & snippets
     use { 'hrsh7th/nvim-cmp', requires = {
@@ -124,13 +144,18 @@ return require('packer').startup({
 
     -- Misc
     use { "nullchilly/fsread.nvim", opt = true, cmd = { 'FSRead', 'FSToggle' } } -- "Flow-state" reading. Defocus word endings to make it faster to read
+    use {
+      "mickael-menu/zk-nvim",
+      opt = true,
+      cmd = { 'Zk*' },
+      config = function()
+        require "zk".setup({
+          picker = 'telescope'
+        })
+      end
+    }
 
     -- Non-plugin packages
-    use {
-      "microsoft/vscode-js-debug",
-      opt = true,
-      run = "npm install --legacy-peer-deps && npm run compile"
-    }
     use {
       'Joakker/lua-json5',
       run = './install.sh'

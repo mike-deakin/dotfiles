@@ -24,6 +24,9 @@ end
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
+  if client.server_capabilities.signatureHelpProvider then
+    require('lsp-overloads').setup(client, { })
+  end
 
   -- Mappings.
   local opts = { noremap = true, silent = true, buffer = bufnr }

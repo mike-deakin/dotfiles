@@ -72,6 +72,17 @@ ck.setup({
 				['x'] = { act = dap.terminate, desc = 'Terminate debug connection'},
 			}
 		end,
+		['t'] = function ()
+			local test = require'neotest'
+
+			return {
+				desc = 'Run Tests',
+				['t'] = { act = function () test.run.run() end, desc = 'Run nearest test' },
+				['a'] = { act = function () test.run.run(vim.fn.expand('%')) end, desc = 'Run all tests in file' },
+				['d'] = { act = function () test.run.run({strategy = 'dap'}) end, desc = 'Debug nearest test'},
+				['o'] = { act = function () test.output_panel.toggle() end, desc = 'Toggle output panel'},
+			}
+		end,
 		['na'] = {
 			act = require'ts-node-action'.node_action,
 			desc = 'TreeSitter node action',

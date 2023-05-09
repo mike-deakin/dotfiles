@@ -34,7 +34,7 @@ require 'lualine'.setup {
 -- but that looks awful with a transparent background
 -- This sets it to a prettier color first, sets up bufferline, then reverts 'Normal'
 local normal_hl = vim.api.nvim_get_hl_by_name('Normal', true)
-vim.api.nvim_set_hl(0, 'Normal', {bg = '#3b3f4c'})
+vim.api.nvim_set_hl(0, 'Normal', { bg = '#3b3f4c' })
 
 require 'bufferline'.setup {
     options = {
@@ -62,12 +62,12 @@ require 'bufferline'.setup {
 
 vim.api.nvim_set_hl(0, 'Normal', normal_hl)
 
-vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {link = 'Whitespace'})
-vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', {link = 'Whitespace'})
-vim.api.nvim_set_hl(0, 'IndentBlanklineContext', {fg = '#98c379', nocombine = true})
-vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', {fg = '#98c379', nocombine = true})
-vim.api.nvim_set_hl(0, 'IndentBlanklineContextSpaceChar', {fg = '#98c379', nocombine = true})
-vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', {sp = '#98c379', underline = true})
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { link = 'Whitespace' })
+vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', { link = 'Whitespace' })
+vim.api.nvim_set_hl(0, 'IndentBlanklineContext', { fg = '#98c379', nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = '#98c379', nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextSpaceChar', { fg = '#98c379', nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = '#98c379', underline = true })
 vim.opt.list = true
 vim.opt.listchars:append("eol:⊣")
 require("indent_blankline").setup {

@@ -55,3 +55,4 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc >/dev/null
 
+if [ -f "$HOME/work/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
