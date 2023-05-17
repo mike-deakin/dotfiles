@@ -5,13 +5,20 @@ require 'dap-vscode-js'.setup({
   adapters = { 'pwa-node' }
 })
 
+local dapvars = require'dap.variables'
+dapvars.domains.jest = {
+  ['testNamePattern'] = function(_)
+    return '"should return update type none, if no version provided"'
+  end
+}
+
 dapui.setup()
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
+--dap.listeners.after.event_initialized["dapui_config"] = function()
+  --dapui.open()
+--end
+--dap.listeners.before.event_exited["dapui_config"] = function()
+  --dapui.close()
+--end
 
 dapext.json_decode = require'json5'.parse
 pcall(dapext.load_launchjs, nil, {

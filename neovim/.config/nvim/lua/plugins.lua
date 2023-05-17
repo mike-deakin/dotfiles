@@ -120,7 +120,8 @@ return require('packer').startup({
     use { 'mxsdev/nvim-dap-vscode-js',
       requires = {
         "microsoft/vscode-js-debug",
-        run = "npm install --legacy-peer-deps && npm run compile"
+        opt = true,
+        run = "npm install --legacy-peer-deps --no-save && npm run compile"
       }
     }
 
