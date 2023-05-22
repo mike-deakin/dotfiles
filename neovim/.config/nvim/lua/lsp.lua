@@ -80,11 +80,10 @@ local servers = {
     }
   },
   pylsp = {},
-  --clojure_lsp = {},
   tsserver = {},
   gopls = {},
   elixirls = {
-    cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through Mason
+    cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through scripts
   },
   yamlls = {
     settings = {

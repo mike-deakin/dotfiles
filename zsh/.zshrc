@@ -31,10 +31,10 @@ if command -v rbenv > /dev/null; then
   eval "$(rbenv init - zsh)"
 fi
 
-if command -v go > /dev/null; then
-  export GOPATH=$HOME/go
-  export PATH=$PATH:$GOPATH/bin
-fi
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin
+
+export ZK_NOTEBOOK_DIR=$HOME/commonplace-book
 
 autoload -U add-zsh-hook
 load-nvmrc() {
@@ -56,3 +56,4 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc >/dev/null
 
 if [ -f "$HOME/work/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
+if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
