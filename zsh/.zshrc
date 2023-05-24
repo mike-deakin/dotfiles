@@ -32,7 +32,7 @@ if command -v rbenv > /dev/null; then
 fi
 
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 export ZK_NOTEBOOK_DIR=$HOME/commonplace-book
 
