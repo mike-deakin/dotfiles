@@ -78,7 +78,6 @@ return require('packer').startup({
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                -- fzf-style matching for telescope
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
     use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Syntax-aware motions
-    use 'ziontee113/syntax-tree-surfer'                                             -- Syntax-aware motions
     use 'ckolkey/ts-node-action'
     use 'airblade/vim-gitgutter'
     use 'f-person/git-blame.nvim'

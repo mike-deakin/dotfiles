@@ -8,6 +8,7 @@ end
 
 local cmd = vim.cmd
 local ck = require 'caskey'
+local nodenav = require 'treesitter-nodenav'
 
 ck.setup({
 	{
@@ -27,14 +28,24 @@ ck.setup({
 		['<C-j>'] = { act = ck.cmd 'cnext' },
 		['<C-k>'] = { act = ck.cmd 'cprev' },
 	},
+	['['] = {
+		mode = 'n',
+		['n'] = { act = nodenav.prev_sibling },
+		['%'] = { act = nodenav.scope_start },
+	},
+	[']'] = {
+		mode = 'n',
+		['n'] = { act = nodenav.next_sibling },
+		['%'] = { act = nodenav.scope_end },
+	},
 	['<leader>'] = {
 		mode = 'n',
 		['b'] = {
 			desc = 'Buffer management',
 			['b'] = { act = ck.cmd 'BufferLinePick' },
 			['d'] = { act = ck.cmd 'bd', desc = 'Delete current' },
-			['a'] = { act = ck.cmd '%bd|e#', desc = 'Delete all' },
-			['o'] = { act = ck.cmd '%bd', desc = 'Delete others' },
+			['a'] = { act = ck.cmd '%bd', desc = 'Delete all' },
+			['o'] = { act = ck.cmd '%bd|e#', desc = 'Delete others' },
 		},
 		['f'] = function()
 			local tb = require 'telescope.builtin'
