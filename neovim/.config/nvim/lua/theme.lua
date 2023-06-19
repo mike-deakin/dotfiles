@@ -1,4 +1,5 @@
 vim.opt.termguicolors = true
+vim.opt.laststatus = 3
 
 local od = require 'onedark'
 od.setup {

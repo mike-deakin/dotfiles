@@ -74,6 +74,11 @@ return require('packer').startup({
       },
       config = function() require 'lsp' end
     }
+    use {
+      'jose-elias-alvarez/null-ls.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function() require'null-ls-config' end,
+    }
     use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' }    -- lsp code actions in descriptive window
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                -- fzf-style matching for telescope
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder

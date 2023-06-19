@@ -2,28 +2,11 @@
 --
 local nvim_lsp = require('lspconfig')
 local merge = require('merge')
-
-local function preview_location_callback(_, result, method)
-  if result == nil or vim.tbl_isempty(result) then
-    vim.lsp.log.info(method, 'No location found')
-    return nil
-  end
-  if vim.tbl_islist(result) then
-    vim.lsp.util.preview_location(result[1])
-  else
-    vim.lsp.util.preview_location(result)
-  end
-end
-
-local function peek_definition()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
-end
+local peek_definition = require'peek'
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  client.server_capabilities.semanticTokensProvider = nil
   if client.server_capabilities.signatureHelpProvider then
     require('lsp-overloads').setup(client, { })
   end
