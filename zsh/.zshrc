@@ -59,3 +59,4 @@ load-nvmrc >/dev/null
 
 if [ -f "$HOME/work/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
 if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
+if [ -f "$HOME/.local.zshrc" ]; then source "$HOME/.local.zshrc"; fi

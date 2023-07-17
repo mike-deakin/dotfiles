@@ -1,17 +1,11 @@
 -- Language Server Protocol
---
 local nvim_lsp = require('lspconfig')
 local merge = require('merge')
 local peek_definition = require'peek'
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  if client.server_capabilities.signatureHelpProvider then
-    require('lsp-overloads').setup(client, { })
-  end
+local M = {}
 
-  -- Mappings.
+local set_mappings = function(bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -39,6 +33,19 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>oi',
     function() vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true }) end, opts)
 end
+--
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+function M.on_attach(client, bufnr)
+  client.server_capabilities.semanticTokensProvider = nil
+  if client.server_capabilities.signatureHelpProvider then
+    require('lsp-overloads').setup(client, { })
+  end
+
+  set_mappings(bufnr)
+end
+
 
 -- cmp completions
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -65,6 +72,7 @@ local servers = {
   pylsp = {},
   tsserver = {},
   gopls = {},
+  hls = {},
   elixirls = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through scripts
   },
@@ -84,7 +92,7 @@ local servers = {
 -- map buffer local keybindings when the language server attaches
 for lsp, conf in pairs(servers) do
   nvim_lsp[lsp].setup(merge({
-    on_attach = on_attach,
+    on_attach = M.on_attach,
     flags = {
       debounce_text_changes = 150,
     },
@@ -95,3 +103,5 @@ end
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
+
+return M

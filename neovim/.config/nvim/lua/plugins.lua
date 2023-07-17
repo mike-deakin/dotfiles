@@ -23,7 +23,9 @@ return require('packer').startup({
     -- Meta
     use 'wbthomason/packer.nvim'
     use 'nvim-telescope/telescope-packer.nvim'
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
+      require 'treesitter-config'
+    end }
     use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
     use { "Nexmean/caskey.nvim" } -- Group-based keymap configuration syntax
 
@@ -42,7 +44,11 @@ return require('packer').startup({
         -- disable netrw
         vim.g.loaded = 1
         vim.g.loaded_netrwPlugin = 1
-        require 'nvim-tree'.setup()
+        require 'nvim-tree'.setup {
+          renderer = {
+            group_empty = true,
+          },
+        }
       end
     }
 
@@ -77,7 +83,7 @@ return require('packer').startup({
     use {
       'jose-elias-alvarez/null-ls.nvim',
       requires = 'nvim-lua/plenary.nvim',
-      config = function() require'null-ls-config' end,
+      config = function() require 'null-ls-config' end,
     }
     use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' }    -- lsp code actions in descriptive window
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                -- fzf-style matching for telescope
@@ -108,10 +114,11 @@ return require('packer').startup({
       opt = true,
       cmd = { 'Octo' },
       config = function()
-        require 'octo'.setup({
-          ssh_aliases = { ['github.ef.com'] = 'github.com' }
-        })
+        require 'octo'.setup()
       end
+    }
+    use {
+      'mfussenegger/nvim-jdtls' -- Java language server
     }
 
     -- Debugging

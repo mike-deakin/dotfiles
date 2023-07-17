@@ -15,7 +15,10 @@ local languages = {
   'tsx',
   'graphql',
   'hcl',
-  'go'
+  'go',
+  'haskell',
+  'java',
+  'kotlin',
 }
 
 for _, lang in ipairs(languages) do
