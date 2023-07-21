@@ -1,7 +1,8 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
-telescope.load_extension('fzf')
-telescope.load_extension('packer')
+telescope.load_extension'fzf'
+telescope.load_extension'packer'
+telescope.load_extension'hoogle'
 
 local M = {}
 

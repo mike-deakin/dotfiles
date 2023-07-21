@@ -88,6 +88,7 @@ return require('packer').startup({
     use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' }    -- lsp code actions in descriptive window
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                -- fzf-style matching for telescope
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
+    use 'psiska/telescope-hoogle.nvim'
     use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Syntax-aware motions
     use 'ckolkey/ts-node-action'
     use 'airblade/vim-gitgutter'
@@ -156,7 +157,7 @@ return require('packer').startup({
     -- Misc
     use { "nullchilly/fsread.nvim", opt = true, cmd = { 'FSRead', 'FSToggle' } } -- "Flow-state" reading. Defocus word endings to make it faster to read
     use {
-      "mickael-menu/zk-nvim",
+      "mickael-menu/zk-nvim", -- Zettelkasten notes (via `zk` cli tool)
       opt = true,
       cmd = { 'Zk*' },
       config = function()
