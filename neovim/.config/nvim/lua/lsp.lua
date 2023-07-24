@@ -86,6 +86,7 @@ local servers = {
       }
     }
   },
+  rust_analyzer = {},
 }
 
 -- Use a loop to conveniently call 'setup' on multiple servers and

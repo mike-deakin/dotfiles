@@ -3,22 +3,23 @@ local ts_install = function (language)
 end
 
 local languages = {
-  'query',
   'bash',
   'c',
   'elixir',
+  'go',
+  'graphql',
+  'haskell',
+  'hcl',
+  'java',
+  'javascript',
+  'kotlin',
   'lua',
   'python',
-  'vim',
-  'javascript',
-  'typescript',
+  'query',
+  'rust',
   'tsx',
-  'graphql',
-  'hcl',
-  'go',
-  'haskell',
-  'java',
-  'kotlin',
+  'typescript',
+  'vim',
 }
 
 for _, lang in ipairs(languages) do

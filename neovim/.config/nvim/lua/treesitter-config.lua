@@ -81,6 +81,7 @@ require 'nvim-treesitter.configs'.setup {
     },
 }
 
-vim.opt.foldenable = false
+vim.opt.foldenable = true
+vim.opt.foldlevel = 9 -- This breaks 'zm', but I never use that. 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

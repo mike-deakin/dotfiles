@@ -29,3 +29,6 @@ require'theme'
 require'keymap'
 require'dap-config'
 require'telescope-config'
+local terminal = require'terminal'
+
+vim.api.nvim_create_user_command('Term', terminal.start_or_open_terminal, {shell = 'zsh'})
