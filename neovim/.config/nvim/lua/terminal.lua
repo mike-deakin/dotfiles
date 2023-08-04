@@ -1,13 +1,14 @@
 local M = {}
 
-M.start_or_open_terminal = function(options)
-  -- TODO: Verify options given
-  local terminal_buffer = vim.fn.bufnr("term://") -- TODO: Check if there's a more deterministic (is there a way of confirming the buffer type?)
+TerminalBuffer = -1
 
-  if terminal_buffer == -1 then
-    vim.cmd("botright split term://" .. options.shell)
+M.start_or_open_terminal = function()
+  if TerminalBuffer == -1 then
+    vim.cmd[[botright split]]
+    vim.cmd[[terminal]]
+    TerminalBuffer = vim.fn.bufnr()
   else
-    vim.cmd("sb " .. terminal_buffer)
+    vim.cmd("botright sb " .. TerminalBuffer)
   end
 end
 

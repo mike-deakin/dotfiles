@@ -8,7 +8,8 @@ end
 
 local cmd = vim.cmd
 local ck = require 'caskey'
-local nodenav = require 'treesitter-nodenav'
+--local nodenav = require 'treesitter-nodenav' -- This doesn't work :(
+local sts = require 'syntax-tree-surfer'
 
 ck.setup({
 	{
@@ -28,15 +29,28 @@ ck.setup({
 		['<C-j>'] = { act = ck.cmd 'cnext' },
 		['<C-k>'] = { act = ck.cmd 'cprev' },
 	},
-	['['] = {
+	{
 		mode = 'n',
-		['n'] = { act = nodenav.prev_sibling },
-		['%'] = { act = nodenav.scope_start },
+		name = 'Treesitter actions',
+		desc = 'Moves and swaps powered by Treesitter (not dot-repeatable yet)',
+		['<M-k>'] = { act = function() sts.move('n', true) end, desc = 'Swap parent node with its sibling upwards.' },
+		['<M-j>'] = { act = function() sts.move('n', false) end, desc = 'Swap parent node with its sibling downwards.' },
+		['<M-h>'] = { act = function() sts.surf('prev', 'normal', true) end, desc = 'Swap node with previous sibling.' },
+		['<M-l>'] = { act = function() sts.surf('next', 'normal', true) end, desc = 'Swap node with next sibling.' },
 	},
-	[']'] = {
-		mode = 'n',
-		['n'] = { act = nodenav.next_sibling },
-		['%'] = { act = nodenav.scope_end },
+	{
+		name = 'Line moves',
+		desc = 'Moves and swaps by line',
+		{
+			mode = 'n',
+			['J'] = { act = function() require 'move-line'.moveLineDown() end },
+			['K'] = { act = function() require 'move-line'.moveLineUp() end },
+		},
+		{
+			mode = 'x',
+			['J'] = { act = function() require 'move-line'.moveLinesDown() end },
+			['K'] = { act = function() require 'move-line'.moveLinesUp() end },
+		},
 	},
 	['<leader>'] = {
 		mode = 'n',
@@ -73,29 +87,30 @@ ck.setup({
 			return {
 				desc = 'Debugger (DAP)',
 				['t'] = { act = dap.toggle_breakpoint, desc = 'Toggle breakpoint' },
-				['c'] = { act = function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = 'Set contitional breakpoint'},
+				['c'] = { act = function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc =
+				'Set contitional breakpoint' },
 				['d'] = { act = dap.continue, desc = 'Continue' },
-				['o'] = { act = dap.step_over, desc = 'Step over'},
-				['i'] = { act = dap.step_into, desc = 'Step into'},
-				['u'] = { act = dap.step_out, desc = 'Step out (think "up")'},
-				['r'] = { act = dap.repl.open, desc = 'Open REPL'},
-				['l'] = { act = dap.run_last, desc = 'Run last'},
-				['x'] = { act = dap.terminate, desc = 'Terminate debug connection'},
+				['o'] = { act = dap.step_over, desc = 'Step over' },
+				['i'] = { act = dap.step_into, desc = 'Step into' },
+				['u'] = { act = dap.step_out, desc = 'Step out (think "up")' },
+				['r'] = { act = dap.repl.open, desc = 'Open REPL' },
+				['l'] = { act = dap.run_last, desc = 'Run last' },
+				['x'] = { act = dap.terminate, desc = 'Terminate debug connection' },
 			}
 		end,
-		['t'] = function ()
-			local test = require'neotest'
+		['t'] = function()
+			local test = require 'neotest'
 
 			return {
 				desc = 'Run Tests',
-				['t'] = { act = function () test.run.run() end, desc = 'Run nearest test' },
-				['a'] = { act = function () test.run.run(vim.fn.expand('%')) end, desc = 'Run all tests in file' },
-				['d'] = { act = function () test.run.run({strategy = 'dap'}) end, desc = 'Debug nearest test'},
-				['o'] = { act = function () test.output_panel.toggle() end, desc = 'Toggle output panel'},
+				['t'] = { act = function() test.run.run() end, desc = 'Run nearest test' },
+				['a'] = { act = function() test.run.run(vim.fn.expand('%')) end, desc = 'Run all tests in file' },
+				['d'] = { act = function() test.run.run({ strategy = 'dap' }) end, desc = 'Debug nearest test' },
+				['o'] = { act = function() test.output_panel.toggle() end, desc = 'Toggle output panel' },
 			}
 		end,
 		['na'] = {
-			act = require'ts-node-action'.node_action,
+			act = require 'ts-node-action'.node_action,
 			desc = 'TreeSitter node action',
 		},
 	},
@@ -109,56 +124,9 @@ map('x', '<leader>y', '<Plug>(vsnip-select-text)<Esc>')
 map('n', '<leader>x', '<Plug>(vsnip-cut-text)')
 map('x', '<leader>x', '<Plug>(vsnip-cut-text)')
 
--- Refactors
-map('n', '<leader>na', '<cmd>lua require"ts-node-action".node_action()<CR>')
-
--- Debugging
-map('n', '<leader>de', '<cmd>lua require"dapui".eval(nil, {width = 50, height = 10})<CR>')
-
--- Treesitter functions
--- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
-vim.keymap.set("n", "vU", function()
-	vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-vim.keymap.set("n", "vD", function()
-	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-
--- Swap Current Node at the Cursor with it's siblings, Dot Repeatable
-vim.keymap.set("n", "vd", function()
-	vim.opt.opfunc = "v:lua.STSSwapCurrentNodeNextNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-vim.keymap.set("n", "vu", function()
-	vim.opt.opfunc = "v:lua.STSSwapCurrentNodePrevNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-
-map("n", "vx", '<cmd>STSSelectMasterNode<cr>')
-map("n", "vn", '<cmd>STSSelectCurrentNode<cr>')
-map("x", "J", '<cmd>STSSelectNextSiblingNode<cr>')
-map("x", "K", '<cmd>STSSelectPrevSiblingNode<cr>')
-map("x", "H", '<cmd>STSSelectParentNode<cr>')
-map("x", "L", '<cmd>STSSelectChildNode<cr>')
-map("x", "<A-j>", '<cmd>STSSwapNextVisual<cr>')
-map("x", "<A-k>", '<cmd>STSSwapPrevVisual<cr>')
-
--- Line operations
-map('n', '<M-j>', '<cmd>lua require"move-line".moveLineDown()<CR>')
-map('n', '∆', '<cmd>lua require"move-line".moveLineDown()<CR>') -- ∆ == option+j
-map('n', '<M-k>', '<cmd>lua require"move-line".moveLineUp()<CR>')
-map('n', '˚', '<cmd>lua require"move-line".moveLineUp()<CR>')    -- ˚ == option+k
-map('x', '<M-j>', ':<C-u>lua require"move-line".moveLinesDown()<CR>')
-map('x', '∆', ':<C-u>lua require"move-line".moveLinesDown()<CR>') -- ∆ == option+j
-map('x', '<M-k>', ':<C-u>lua require"move-line".moveLinesUp()<CR>')
-map('x', '˚', ':<C-u>lua require"move-line".moveLinesUp()<CR>')  -- ˚ == option+k
-
 -- Duplicate line
 map('n', '∂', '"dY"dp') -- ∂ == option+d
 map('n', '<M-d>', '"dY"dp')
-
 -- Duplicate line down
 map('n', 'Ô', '"dY"dp')      -- Ô == option+shift+j
 map('n', '<S-M-j>', '"dY"dp') -- Ô == option+shift+j

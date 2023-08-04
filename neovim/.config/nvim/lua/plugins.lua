@@ -90,6 +90,7 @@ return require('packer').startup({
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
     use 'psiska/telescope-hoogle.nvim'
     use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Syntax-aware motions
+    use 'ziontee113/syntax-tree-surfer'                                             -- Syntax-aware motions
     use 'ckolkey/ts-node-action'
     use 'airblade/vim-gitgutter'
     use 'f-person/git-blame.nvim'
