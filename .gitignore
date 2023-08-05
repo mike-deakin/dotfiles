@@ -4,3 +4,4 @@ neovim/.config/nvim/spell/
 .zsh_history
 **/.zsh_sessions
 **/.luarc.json
+tmux/plugins

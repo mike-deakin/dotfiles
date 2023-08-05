@@ -1,3 +1,6 @@
 [submodule "zsh/prezto"]
 	path = zsh/.zprezto
 	url = git@github.com:sorin-ionescu/prezto.git
+[submodule "tmux/tpm"]
+	path = tmux/tpm
+	url = https://github.com/tmux-plugins/tpm
