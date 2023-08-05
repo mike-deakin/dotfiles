@@ -57,6 +57,7 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc >/dev/null
 
+if [ -f "$HOME/.cargo/env" ]; then . "$HOME/.cargo/env"; fi
 if [ -f "$HOME/work/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
 if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
 if [ -f "$HOME/.local.zshrc" ]; then source "$HOME/.local.zshrc"; fi

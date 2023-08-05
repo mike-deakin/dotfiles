@@ -50,5 +50,3 @@ echo "Linking $HERE/noevim/.config/nvim to $USER_HOME/.config/nvim"
 echo "Linking $HERE/git/.gitconfig to $USER_HOME/.gitconfig"
 [[ ! -d $USER_HOME/.config/nvim ]] && sudo ln -s $HERE/git/.gitconfig $USER_HOME/.gitconfig \
 	&& ln -s $HERE/git/.gitignore $USER_HOME/.gitignore
-
-#install_nvim_plugin_manager

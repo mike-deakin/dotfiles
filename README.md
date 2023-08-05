@@ -12,6 +12,7 @@ Powered by zsh|tmux|neovim
  * [nvim] Implement a lua-friendly version of [repeat.vim](https://github.com/tpope/repeat.vim) ___Because___ using it to make repeatable lua mappings will be useful 
  * [nvim] Install elixir language server via install scripts ___Because___ it is not installed automatically by lsp_config
  * [tmux] Improve the nav pseudo-mode bindings after getting used to using it. ___Because___ it works but doesn't have great ergonomics or many features.
+ * [tmux] Update status line ___Because___ it's broken and looks bad currently.
  * [tmux] Add a mode indication to the statusline for the nav pseudo-mode ___Because___ there's no feedback about what mode you're currently in.
  * [all] Tidy use of .config (XDG_CONFIG)
 

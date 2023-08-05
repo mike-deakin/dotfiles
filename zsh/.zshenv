@@ -5,7 +5,7 @@
 # zsh references $ZDOTFILES to find other dotfiles
 # ${(%):-%N} is a magic prompt expansion that resolves this .zshenv file path
 THIS=${(%):-%N}
-# THIS could be the real file or the linked file, so resolve it if possible
+# $THIS could be the real file or the linked file, so resolve it if possible
 HERE=${$(readlink $THIS):-$THIS}
 export ZDOTDIR=${$(dirname $HERE):-$HOME}
 
@@ -13,4 +13,9 @@ export ZDOTDIR=${$(dirname $HERE):-$HOME}
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-if [ -f "$HOME/.cargo/env" ]; then . "$HOME/.cargo/env"; fi
+
+# XDG environment variables
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
