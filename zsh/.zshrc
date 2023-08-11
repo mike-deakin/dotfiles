@@ -40,18 +40,20 @@ export ZK_NOTEBOOK_DIR=$HOME/commonplace-book
 
 autoload -U add-zsh-hook
 load-nvmrc() {
-  local nvmrc_path="$(nvm_find_nvmrc)"
+  if command -v nvm_find_nvmrc > /dev/null; then
+    local nvmrc_path="$(nvm_find_nvmrc)"
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    if [[ -n "$nvmrc_path" ]]; then
+      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
-      nvm use
+      if [[ "$nvmrc_node_version" = "N/A" ]]; then
+        nvm install
+      elif [[ "$nvmrc_node_version" != "$(nvm version)" ]]; then
+        nvm use
+      fi
+    elif [[ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ]] && [[ "$(nvm version)" != "$(nvm version default)" ]]; then
+      nvm use default
     fi
-  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
-    nvm use default
   fi
 }
 add-zsh-hook chpwd load-nvmrc
@@ -59,5 +61,5 @@ load-nvmrc >/dev/null
 
 if [ -f "$HOME/.cargo/env" ]; then . "$HOME/.cargo/env"; fi
 if [ -f "$HOME/work/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
-if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
+if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/play/.zshrc"; fi
 if [ -f "$HOME/.local.zshrc" ]; then source "$HOME/.local.zshrc"; fi

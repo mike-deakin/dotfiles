@@ -17,11 +17,11 @@ install_terminal() {
 }
 
 install_zsh () {
-	apt install zsh
+	sudo apt install zsh
 }
 
 install_tmux() {
-	apt install tmux
+	sudo apt install tmux
 }
 
 install_nvim () {
