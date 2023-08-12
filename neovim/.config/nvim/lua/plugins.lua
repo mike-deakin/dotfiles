@@ -72,7 +72,7 @@ return require('packer').startup({
       end
     }
 
-    -- IDEA-like stuff
+    -- IDE stuff
     use { 'neovim/nvim-lspconfig', -- https://github.com/neovim/nvim-lspconfig
       requires = {
         'hrsh7th/cmp-nvim-lsp',
@@ -80,17 +80,17 @@ return require('packer').startup({
       },
       config = function() require 'lsp' end
     }
+    use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' } -- lsp code actions in descriptive window
     use {
-      'jose-elias-alvarez/null-ls.nvim',
-      requires = 'nvim-lua/plenary.nvim',
-      config = function() require 'null-ls-config' end,
-    }
-    use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' }    -- lsp code actions in descriptive window
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                -- fzf-style matching for telescope
-    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy finder
-    use 'psiska/telescope-hoogle.nvim'
-    use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Syntax-aware motions
-    use 'ziontee113/syntax-tree-surfer'                                             -- Syntax-aware motions
+      'nvim-telescope/telescope.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'psiska/telescope-hoogle.nvim',
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      }
+    }                                                 -- Fuzzy finder
+    use 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
+    use 'ziontee113/syntax-tree-surfer'               -- Syntax-aware motions
     use 'ckolkey/ts-node-action'
     use 'airblade/vim-gitgutter'
     use 'f-person/git-blame.nvim'
@@ -101,6 +101,7 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter',
         'antoinemadec/FixCursorHold.nvim',
         'haydenmeade/neotest-jest',
+        'rouge8/neotest-rust',
       },
       config = function()
         require 'neotest-config'
@@ -147,18 +148,18 @@ return require('packer').startup({
       'hrsh7th/vim-vsnip',
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'rafamadriz/friendly-snippets',
+      { 'tzachar/cmp-fuzzy-buffer', requires = { 'tzachar/fuzzy.nvim' } },
+      { 'tzachar/cmp-fuzzy-path',   requires = { 'tzachar/fuzzy.nvim' } },
     }, config = function() require 'cmp-config' end }
     use {
       "windwp/nvim-autopairs",
       config = function() require("nvim-autopairs").setup {} end
     }
-    use { 'tzachar/cmp-fuzzy-buffer', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
-    use { 'tzachar/cmp-fuzzy-path', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
 
     -- Misc
     use { "nullchilly/fsread.nvim", opt = true, cmd = { 'FSRead', 'FSToggle' } } -- "Flow-state" reading. Defocus word endings to make it faster to read
     use {
-      "mickael-menu/zk-nvim", -- Zettelkasten notes (via `zk` cli tool)
+      "mickael-menu/zk-nvim",                                                    -- Zettelkasten notes (via `zk` cli tool)
       opt = true,
       cmd = { 'Zk*' },
       config = function()
@@ -166,6 +167,18 @@ return require('packer').startup({
           picker = 'telescope'
         })
       end
+    }
+    use {
+      "luckasRanarison/nvim-devdocs",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+      cmd = { 'Devdocs*' },
+      config = function()
+        require 'nvim-devdocs'.setup()
+      end,
     }
 
     -- Non-plugin packages

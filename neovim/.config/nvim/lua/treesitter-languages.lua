@@ -10,6 +10,7 @@ local languages = {
   'graphql',
   'haskell',
   'hcl',
+  'html',
   'java',
   'javascript',
   'kotlin',

@@ -33,7 +33,6 @@ local set_mappings = function(bufnr)
   vim.keymap.set('n', '<space>oi',
     function() vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true }) end, opts)
 end
---
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
