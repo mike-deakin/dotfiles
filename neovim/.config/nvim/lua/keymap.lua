@@ -86,6 +86,7 @@ ck.setup({
 
 			return {
 				desc = 'Debugger (DAP)',
+				--when = 'DapConfigured',
 				['t'] = { act = dap.toggle_breakpoint, desc = 'Toggle breakpoint' },
 				['c'] = { act = function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc =
 				'Set contitional breakpoint' },
@@ -100,9 +101,9 @@ ck.setup({
 		end,
 		['t'] = function()
 			local test = require 'neotest'
-
 			return {
 				desc = 'Run Tests',
+				when = ck.emitted 'NeoTestConfigured',
 				['t'] = { act = function() test.run.run() end, desc = 'Run nearest test' },
 				['a'] = { act = function() test.run.run(vim.fn.expand('%')) end, desc = 'Run all tests in file' },
 				['d'] = { act = function() test.run.run({ strategy = 'dap' }) end, desc = 'Debug nearest test' },

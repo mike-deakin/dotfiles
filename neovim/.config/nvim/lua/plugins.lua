@@ -103,9 +103,9 @@ return require('packer').startup({
         'haydenmeade/neotest-jest',
         'rouge8/neotest-rust',
       },
-      config = function()
-        require 'neotest-config'
-      end
+      --config = function()
+      --require 'neotest-config'
+      --end
     }
     use {
       'pwntester/octo.nvim',
@@ -121,11 +121,15 @@ return require('packer').startup({
       end
     }
     use {
-      'mfussenegger/nvim-jdtls' -- Java language server
+      'mfussenegger/nvim-jdtls', -- Java language server
+      ft = { 'java', 'kotlin' },
     }
 
     -- Debugging
-    use { 'mfussenegger/nvim-dap' }
+    use {
+      'mfussenegger/nvim-dap',
+      --cmd = { 'Dap*' },
+    }
     use { 'rcarriga/nvim-dap-ui' }
     use { 'theHamsta/nvim-dap-virtual-text',
       config = function() require 'nvim-dap-virtual-text'.setup({}) end
@@ -135,7 +139,9 @@ return require('packer').startup({
       requires = {
         "microsoft/vscode-js-debug",
         run = "npm install --legacy-peer-deps && npm run compile"
-      }
+      },
+      module = 'dap-vscode-js',
+      ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' }
     }
 
     -- Completions & snippets

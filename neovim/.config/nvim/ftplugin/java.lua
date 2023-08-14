@@ -12,10 +12,6 @@ local config = {
                         name = 'JavaSE-17',
                         path = vim.env.HOME .. '/.sdkman/candidates/java/17.0.7-oracle'
                     },
-                    --{
-                        --name = 'GraalVM-20.0.1',
-                        --path = vim.env.HOME .. '/.sdkman/candidates/java/20.0.1-graal'
-                    --}
                 }
             }
         }
