@@ -42,6 +42,7 @@ echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"
 install_tmux
 echo "Linking $HERE/tmux/.tmux.conf to $USER_HOME/.tmux.conf"
 [[ ! -f $USER_HOME/.config/tmux ]] && sudo ln -s $HERE/tmux $USER_HOME/.config/tmux
+[[ ! -f $USER_HOME/.config/tmux-powerline ]] && sudo ln -s $HERE/tmux/powerline $USER_HOME/.config/tmux-powerline
 
 install_nvim
 echo "Linking $HERE/noevim/.config/nvim to $USER_HOME/.config/nvim"
