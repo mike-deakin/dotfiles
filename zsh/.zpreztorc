@@ -17,6 +17,7 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt' \
+  'dotenv' \
 
 zstyle ':prezto:module:editor' key-bindings 'vi'
 

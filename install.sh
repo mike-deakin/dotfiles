@@ -39,6 +39,7 @@ install_terminal
 install_zsh
 echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"
 [[ ! -f $USER_HOME/.zshenv ]] && ln -s $HERE/zsh/.zshenv $USER_HOME/.zshenv # points zsh to config in this directory.
+[[ -d $HERE/zsh/.zprezto ]] && [[ ! -d $HERE/zsh/.zprezto/contrib ]] && ln -s $HERE/zsh/modules $HERE/zsh/.zprezto/contrib
 
 install_tmux
 echo "Linking $HERE/tmux/.tmux.conf to $USER_HOME/.tmux.conf"
