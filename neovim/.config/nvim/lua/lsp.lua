@@ -1,7 +1,8 @@
 -- Language Server Protocol
-local nvim_lsp = require('lspconfig')
-local merge = require('merge')
-local peek_definition = require'peek'
+local nvim_lsp = require 'lspconfig'
+local util = require 'lspconfig.util'
+local merge = require 'merge'
+local peek_definition = require 'peek'
 
 local M = {}
 
@@ -39,12 +40,11 @@ end
 function M.on_attach(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
   if client.server_capabilities.signatureHelpProvider then
-    require('lsp-overloads').setup(client, { })
+    require('lsp-overloads').setup(client, {})
   end
 
   set_mappings(bufnr)
 end
-
 
 -- cmp completions
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -74,6 +74,9 @@ local servers = {
   hls = {},
   elixirls = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through scripts
+  },
+  kotlin_language_server = {
+    cmd = { vim.fn.stdpath('data') .. '/site/pack/packer/start/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
   },
   yamlls = {
     settings = {

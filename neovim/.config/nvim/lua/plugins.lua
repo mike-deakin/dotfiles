@@ -102,6 +102,7 @@ return require('packer').startup({
         'antoinemadec/FixCursorHold.nvim',
         'haydenmeade/neotest-jest',
         'rouge8/neotest-rust',
+        'nvim-neotest/neotest-plenary',
       },
       --config = function()
       --require 'neotest-config'
@@ -191,6 +192,10 @@ return require('packer').startup({
     use {
       'Joakker/lua-json5',
       run = './install.sh'
+    }
+    use {
+      'fwcd/kotlin-language-server',
+      run = './gradlew installDist',
     }
 
     if packer_bootstrap then
