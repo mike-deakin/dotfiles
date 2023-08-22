@@ -59,6 +59,7 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc >/dev/null
 
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 if [ -f "$HOME/.cargo/env" ]; then . "$HOME/.cargo/env"; fi
 if [ -f "$HOME/work/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
 if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/play/.zshrc"; fi
