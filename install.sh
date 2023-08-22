@@ -33,21 +33,22 @@ fi
 git submodule update --init --recursive
 
 install_terminal
-[[ ! -d $USER_HOME/.config/kitty ]] && sudo ln -s $HERE/kitty $USER_HOME/.config/kitty
+# TODO: Fix this. It fails, since the kitty installer creates a .config/kitty/kitty.conf by default
+[[ ! -d $USER_HOME/.config/kitty ]] && ln -s $HERE/kitty $USER_HOME/.config/kitty
 
 install_zsh
 echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"
-[[ ! -f $USER_HOME/.zshenv ]] && sudo ln -s $HERE/zsh/.zshenv $USER_HOME/.zshenv # points zsh to config in this directory.
+[[ ! -f $USER_HOME/.zshenv ]] && ln -s $HERE/zsh/.zshenv $USER_HOME/.zshenv # points zsh to config in this directory.
 
 install_tmux
 echo "Linking $HERE/tmux/.tmux.conf to $USER_HOME/.tmux.conf"
-[[ ! -f $USER_HOME/.config/tmux ]] && sudo ln -s $HERE/tmux $USER_HOME/.config/tmux
-[[ ! -f $USER_HOME/.config/tmux-powerline ]] && sudo ln -s $HERE/tmux/powerline $USER_HOME/.config/tmux-powerline
+[[ ! -d $USER_HOME/.config/tmux ]] && ln -s $HERE/tmux $USER_HOME/.config/tmux
+[[ ! -d $USER_HOME/.config/tmux-powerline ]] && ln -s $HERE/tmux/powerline $USER_HOME/.config/tmux-powerline
 
 install_nvim
 echo "Linking $HERE/noevim/.config/nvim to $USER_HOME/.config/nvim"
-[[ ! -d $USER_HOME/.config/nvim ]] && sudo ln -s $HERE/neovim/.config/nvim $USER_HOME/.config/nvim
+[[ ! -d $USER_HOME/.config/nvim ]] && ln -s $HERE/neovim/.config/nvim $USER_HOME/.config/nvim
 
 echo "Linking $HERE/git/.gitconfig to $USER_HOME/.gitconfig"
-[[ ! -d $USER_HOME/.config/nvim ]] && sudo ln -s $HERE/git/.gitconfig $USER_HOME/.gitconfig \
+[[ ! -d $USER_HOME/.config/nvim ]] && ln -s $HERE/git/.gitconfig $USER_HOME/.gitconfig \
 	&& ln -s $HERE/git/.gitignore $USER_HOME/.gitignore
