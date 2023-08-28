@@ -5,6 +5,7 @@ zstyle ':prezto:*:*' color 'yes'
 
 # Load modules. The order matters.
 # https://github.com/sorin-ionescu/prezto/tree/master/modules#
+zstyle ':prezto:load' pmodule-dirs $ZDOTDIR/modules
 zstyle ':prezto:load' pmodule \
   'editor' \
   'history' \

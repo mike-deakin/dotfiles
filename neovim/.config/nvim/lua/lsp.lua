@@ -1,6 +1,5 @@
 -- Language Server Protocol
 local nvim_lsp = require 'lspconfig'
-local util = require 'lspconfig.util'
 local merge = require 'merge'
 local peek_definition = require 'peek'
 
@@ -83,7 +82,8 @@ local servers = {
       yaml = {
         schemas = {
           ["https://json.schemastore.org/circleciconfig.json"] = "/.circleci/*",
-          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+          ["https://json.schemastore.org/swagger-2.0.json"] = "**/openapi.yaml",
         }
       }
     }

@@ -103,10 +103,8 @@ return require('packer').startup({
         'haydenmeade/neotest-jest',
         'rouge8/neotest-rust',
         'nvim-neotest/neotest-plenary',
+        '~/play/neotest-junit'
       },
-      --config = function()
-      --require 'neotest-config'
-      --end
     }
     use {
       'pwntester/octo.nvim',
@@ -123,7 +121,7 @@ return require('packer').startup({
     }
     use {
       'mfussenegger/nvim-jdtls', -- Java language server
-      ft = { 'java', 'kotlin' },
+      module = {'jdtls'}
     }
 
     -- Debugging

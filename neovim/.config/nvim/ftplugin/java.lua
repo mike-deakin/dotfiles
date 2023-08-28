@@ -1,21 +1,21 @@
-local lsp_config = require'lsp'
+local lsp_config = require 'lsp'
 
-local config = {
+require('jdtls').start_or_attach({
     cmd = { vim.env.HOME .. '/.config/lsp/jdtls/bin/jdtls' },
     root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
     on_attach = lsp_config.on_attach,
     settings = {
         java = {
-            configuration = {
-                runtimes = {
-                    {
-                        name = 'JavaSE-17',
-                        path = vim.env.HOME .. '/.sdkman/candidates/java/17.0.7-oracle'
-                    },
-                }
-            }
+            signatureHelp = { enabled = true },
         }
     }
-}
+})
 
-require('jdtls').start_or_attach(config)
+--require 'neotest'.setup({
+    --log_level = vim.log.levels.DEBUG,
+    --adapters = {
+        --require 'neotest-junit' ({}),
+    --}
+--})
+
+--require 'caskey'.emit('NeoTestConfigured')
