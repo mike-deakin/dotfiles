@@ -121,7 +121,7 @@ return require('packer').startup({
     }
     use {
       'mfussenegger/nvim-jdtls', -- Java language server
-      module = {'jdtls'}
+      module = { 'jdtls' }
     }
 
     -- Debugging
@@ -172,6 +172,19 @@ return require('packer').startup({
           picker = 'telescope'
         })
       end
+    }
+    use {
+      "ellisonleao/glow.nvim",
+      config = function()
+        require("glow").setup({
+          width = 999,
+          height = 999,
+          width_ratio = 0.8,
+          height_ratio = 0.8,
+          border = 'shadow',
+        })
+      end,
+      cmd = { 'Glow' }
     }
     use {
       "luckasRanarison/nvim-devdocs",
