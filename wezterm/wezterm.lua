@@ -7,11 +7,10 @@ if wt.config_builder then
 end
 
 config.term = 'wezterm'
---config.color_scheme = 'Afterglow'
 config.color_scheme = 'Andromeda'
---config.window_background_opacity = 1.0
 config.font = wt.font 'Hack Nerd Font Mono'
 config.font_size = 13
+config.underline_position = '-3'
 
 wt.on('toggle-transparency', function (window, _)
   local overrides = window:get_config_overrides() or {}
@@ -21,7 +20,6 @@ wt.on('toggle-transparency', function (window, _)
     overrides.window_background_opacity = nil
   end
 end)
-
 
 config.keys = {
   {
