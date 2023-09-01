@@ -19,6 +19,7 @@ wt.on('toggle-transparency', function (window, _)
   else
     overrides.window_background_opacity = nil
   end
+  window:set_config_overrides(overrides)
 end)
 
 config.keys = {
