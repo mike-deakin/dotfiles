@@ -75,7 +75,9 @@ local servers = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through scripts
   },
   kotlin_language_server = {
-    cmd = { vim.fn.stdpath('data') .. '/site/pack/packer/start/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
+    cmd = {
+      vim.fn.stdpath('data') ..
+      '/site/pack/packer/start/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
   },
   yamlls = {
     settings = {

@@ -1,4 +1,4 @@
-require 'leap'.set_default_keymaps()
+--require 'leap'.set_default_keymaps()
 -- Helpers stolen from https://github.com/AyeSpacey/Nvimfy/blob/main/lua/keymaps.lua
 local function map(mode, lhs, rhs, opts)
 	local options = { noremap = true }
@@ -39,17 +39,24 @@ ck.setup({
 		['<M-l>'] = { act = function() sts.surf('next', 'normal', true) end, desc = 'Swap node with next sibling.' },
 	},
 	{
+		mode = { 'n', 'x', 'o' },
+		name = 'Flash motions',
+		['s'] = { act = function() require 'flash'.jump() end },
+		['S'] = { act = function() require 'flash'.treesitter() end },
+		['r'] = { mode = 'o', act = function() require 'flash'.remote() end }
+	},
+	{
 		name = 'Line moves',
 		desc = 'Moves and swaps by line',
 		{
 			mode = 'n',
-			['J'] = { act = function() require 'move-line'.moveLineDown() end },
-			['K'] = { act = function() require 'move-line'.moveLineUp() end },
+			['J'] = { act = require 'move-line'.moveLineDown },
+			['K'] = { act = require 'move-line'.moveLineUp },
 		},
 		{
 			mode = 'x',
-			['J'] = { act = function() require 'move-line'.moveLinesDown() end },
-			['K'] = { act = function() require 'move-line'.moveLinesUp() end },
+			['J'] = { act = require 'move-line'.moveLinesDown },
+			['K'] = { act = require 'move-line'.moveLinesUp },
 		},
 	},
 	['<leader>'] = {
@@ -60,6 +67,8 @@ ck.setup({
 			['d'] = { act = ck.cmd 'bd', desc = 'Delete current' },
 			['a'] = { act = ck.cmd '%bd', desc = 'Delete all' },
 			['o'] = { act = ck.cmd '%bd|e#', desc = 'Delete others' },
+			['p'] = { act = ck.cmd 'bp', desc = 'Go to previous buffer' },
+			['n'] = { act = ck.cmd 'bn', desc = 'Go to next buffer' },
 		},
 		['f'] = function()
 			local tb = require 'telescope.builtin'
@@ -86,10 +95,12 @@ ck.setup({
 
 			return {
 				desc = 'Debugger (DAP)',
-				--when = 'DapConfigured',
+				when = ck.emitted 'DapConfigured',
 				['t'] = { act = dap.toggle_breakpoint, desc = 'Toggle breakpoint' },
-				['c'] = { act = function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc =
-				'Set contitional breakpoint' },
+				['c'] = {
+					act = function() dap.set_breakpoint(vim.fn.input("Breakpoint condition:")) end,
+					desc = 'Set contitional breakpoint'
+				},
 				['d'] = { act = dap.continue, desc = 'Continue' },
 				['o'] = { act = dap.step_over, desc = 'Step over' },
 				['i'] = { act = dap.step_into, desc = 'Step into' },
@@ -129,10 +140,10 @@ map('x', '<leader>x', '<Plug>(vsnip-cut-text)')
 map('n', '∂', '"dY"dp') -- ∂ == option+d
 map('n', '<M-d>', '"dY"dp')
 -- Duplicate line down
-map('n', 'Ô', '"dY"dp')      -- Ô == option+shift+j
+map('n', 'Ô', '"dY"dp') -- Ô == option+shift+j
 map('n', '<S-M-j>', '"dY"dp') -- Ô == option+shift+j
 -- Duplicate line up
-map('n', '', '"dY"dP')     --  == option+shift+k
+map('n', '', '"dY"dP') --  == option+shift+k
 map('n', '<S-M-k>', '"dY"dP') --  == option+shift+k
 
 -- Custom Commands
