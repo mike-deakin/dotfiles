@@ -11,6 +11,7 @@ config.color_scheme = 'Andromeda'
 config.font = wt.font 'Hack Nerd Font Mono'
 config.font_size = 13
 config.underline_position = '-3'
+config.send_composed_key_when_left_alt_is_pressed = true
 
 wt.on('toggle-transparency', function (window, _)
   local overrides = window:get_config_overrides() or {}
