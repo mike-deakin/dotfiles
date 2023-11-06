@@ -13,7 +13,8 @@ install_font() {
 }
 
 install_terminal() {
-	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+	HERE=$(readlink -f $(dirname ${BASH_SOURCE:-$0}))
+	source $HERE/wezterm/install.sh
 }
 
 install_zsh () {

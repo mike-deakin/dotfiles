@@ -9,7 +9,7 @@ end
 config.term = 'wezterm'
 config.color_scheme = 'Andromeda'
 config.font = wt.font 'Hack Nerd Font Mono'
-config.font_size = 13
+config.font_size = 11
 config.underline_position = '-3'
 config.send_composed_key_when_left_alt_is_pressed = true
 

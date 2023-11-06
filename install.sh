@@ -32,9 +32,7 @@ fi
 # Update/initialise submodules (Prezto in particular)
 git submodule update --init --recursive
 
-install_terminal
-# TODO: Fix this. It fails, since the kitty installer creates a .config/kitty/kitty.conf by default
-[[ ! -d $USER_HOME/.config/kitty ]] && ln -s $HERE/kitty $USER_HOME/.config/kitty
+install_terminal $OSTYPE
 
 install_zsh
 echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"
