@@ -36,8 +36,6 @@ fi
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-export ZK_NOTEBOOK_DIR=$HOME/commonplace-book
-
 autoload -U add-zsh-hook
 load-nvmrc() {
   if command -v nvm_find_nvmrc > /dev/null; then
@@ -60,7 +58,7 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc >/dev/null
 
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
-if [ -f "$HOME/.cargo/env" ]; then . "$HOME/.cargo/env"; fi
+if [ -f "$HOME/.cargo/env" ]; then source "$HOME/.cargo/env"; fi
 if [ -f "$HOME/.ghcup/env" ]; then source "$HOME/.ghcup/env"; fi
 if [ -f "$HOME/work/.zshrc" ]; then source "$HOME/work/.zshrc"; fi
 if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/play/.zshrc"; fi
