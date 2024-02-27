@@ -1,5 +1,3 @@
-print('This is a test of filetypes!')
-
 require 'neotest'.setup({
   adapters = {
     require('neotest-jest')({

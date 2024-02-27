@@ -27,13 +27,23 @@ return require('packer').startup({
       require 'treesitter-config'
     end }
     use { 'nvim-treesitter/playground', opt = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
-    use { "Nexmean/caskey.nvim" } -- Group-based keymap configuration syntax
+    use { 'Nexmean/caskey.nvim' } -- Group-based keymap configuration syntax
+    use {
+      'm4xshen/hardtime.nvim',
+      requires = {
+        'MunifTanjim/nui.nvim',
+        'nvim-lua/plenary.nvim',
+      },
+      config = function()
+        require'hardtime'.setup()
+      end,
+    }
 
     -- Style
     use 'navarasu/onedark.nvim'
     use 'nvim-lualine/lualine.nvim'
     use 'lukas-reineke/indent-blankline.nvim' -- Show indentation levels
-    use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons' }
+    use { 'akinsho/bufferline.nvim', tag = 'v3.*', requires = 'kyazdani42/nvim-web-devicons' }
 
     -- file browser
     use {
@@ -56,16 +66,16 @@ return require('packer').startup({
     use { 'jbyuki/instant.nvim', opt = true, cmd = { 'InstantStartSession', 'InstantJoinSession' } }
 
     -- Additional functions
-    use 'tpope/vim-sleuth'                                                       -- auto indent width detection
-    use 'tpope/vim-surround'                                                     -- surround text with matching character pairs ()[]{}, etc
-    use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } }      -- word-related mutations (case, endings, search/replace, etc
-    use 'chaoren/vim-wordmotion'                                                 -- camel-case word motions
+    use 'tpope/vim-sleuth'                                                  -- auto indent width detection
+    use 'tpope/vim-surround'                                                -- surround text with matching character pairs ()[]{}, etc
+    use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } } -- word-related mutations (case, endings, search/replace, etc
+    use 'chaoren/vim-wordmotion'                                            -- camel-case word motions
     use 'scrooloose/nerdcommenter'
     --use 'ggandor/leap.nvim'                                                      -- label-based navigation (like vimium)
     use 'folke/flash.nvim'
     use { 'nat-418/boole.nvim', config = function() require 'boole-config' end } -- Better increment/decrement functions
     use {
-      "smjonas/live-command.nvim",
+      'smjonas/live-command.nvim',
       opt = true,
       cmd = { 'Norm', 'Reg' },
       config = function()
@@ -137,8 +147,8 @@ return require('packer').startup({
     use 'nvim-telescope/telescope-dap.nvim' -- DAP propmts in telescope
     use { 'mxsdev/nvim-dap-vscode-js',
       requires = {
-        "microsoft/vscode-js-debug",
-        run = "npm install --legacy-peer-deps && npm run compile"
+        'microsoft/vscode-js-debug',
+        run = 'npm install --legacy-peer-deps && npm run compile'
       },
       module = 'dap-vscode-js',
       ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' }
@@ -158,45 +168,46 @@ return require('packer').startup({
       { 'tzachar/cmp-fuzzy-path',   requires = { 'tzachar/fuzzy.nvim' } },
     }, config = function() require 'cmp-config' end }
     use {
-      "windwp/nvim-autopairs",
-      config = function() require("nvim-autopairs").setup {} end
+      'windwp/nvim-autopairs',
+      config = function() require('nvim-autopairs').setup {} end
     }
 
     -- Misc
-    use { "nullchilly/fsread.nvim", opt = true, cmd = { 'FSRead', 'FSToggle' } } -- "Flow-state" reading. Defocus word endings to make it faster to read
+    use { 'nullchilly/fsread.nvim', opt = true, cmd = { 'FSRead', 'FSToggle' } } -- "Flow-state" reading. Defocus word endings to make it faster to read
     use {
-      "mickael-menu/zk-nvim",                                                    -- Zettelkasten notes (via `zk` cli tool)
+      'mickael-menu/zk-nvim',                                                    -- Zettelkasten notes (via `zk` cli tool)
       opt = true,
       cmd = { 'Zk*' },
       config = function()
-        require "zk".setup({
+        require 'zk'.setup({
           picker = 'telescope'
         })
       end
     }
     use {
-      "ellisonleao/glow.nvim",
+      'ellisonleao/glow.nvim',
       config = function()
-        require("glow").setup({
+        require('glow').setup({
           width = 999,
           height = 999,
           width_ratio = 0.8,
           height_ratio = 0.8,
           border = 'shadow',
+          install_path = '$GOPATH/bin/glow'
         })
       end,
       cmd = { 'Glow' }
     }
     use {
-      "luckasRanarison/nvim-devdocs",
+      'luckasRanarison/nvim-devdocs',
       requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim",
-        "nvim-treesitter/nvim-treesitter",
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope.nvim',
+        'nvim-treesitter/nvim-treesitter',
       },
       cmd = { 'Devdocs*' },
       config = function()
-        require 'nvim-devdocs'.setup()
+        require 'nvim-devdocs'.setup({})
       end,
     }
 

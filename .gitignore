@@ -6,3 +6,4 @@ neovim/.config/nvim/spell/
 **/.luarc.json
 tmux/plugins
 **/.luarc.json
+zsh/.zcompdump
