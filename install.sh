@@ -32,7 +32,7 @@ fi
 # Update/initialise submodules (Prezto in particular)
 git submodule update --init --recursive
 
-install_terminal $OSTYPE
+#install_terminal $OSTYPE
 
 install_zsh
 echo "Linking $HERE/zsh/.zshenv to $USER_HOME/.zshenv"

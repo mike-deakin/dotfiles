@@ -9,10 +9,8 @@ end
 config.term = 'wezterm'
 config.color_scheme = 'Andromeda'
 config.font = wt.font 'Hack Nerd Font Mono'
-config.font_size = 11
 config.underline_position = '-3'
 config.send_composed_key_when_left_alt_is_pressed = true
-config.window_decorations = "NONE"
 config.window_padding = {
   left = 3,
   right = 3,
@@ -37,6 +35,12 @@ config.keys = {
     action = wt.action.CloseCurrentTab { confirm = true },
   },
 }
+
+if string.find(wt.target_triple, "darwin") ~= nil then
+    require'mac-conf'(config)
+else
+    require'linux-conf'(config)
+end
 
 require'tabs'(config)
 

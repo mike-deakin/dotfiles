@@ -4,6 +4,7 @@ Powered by zsh|tmux|neovim
 
 ## TODO/FIXME
 
+ * [all] fix install pathing ___Because___ wezterm install script was incorrectly changing directory for symbolic links made later.
  * [nvim] Write functions to go to/from test files
  * [nvim] Replace `vim-surround` ___Because___ there are some newer alternatives with nicer APIs/key bindings
  * [nvim] Look at vim-snip alternatives ___Because___ lua is cool
