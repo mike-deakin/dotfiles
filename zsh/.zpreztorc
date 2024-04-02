@@ -14,11 +14,11 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'node' \
   'python' \
-  'completion' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt' \
   'dotenv' \
+  'completion' \
 
 zstyle ':prezto:module:editor' key-bindings 'vi'
 

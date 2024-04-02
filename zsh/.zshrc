@@ -27,6 +27,8 @@ if [[ "$(uname)" == "Darwin" ]] then
 fi
 
 if command -v pyenv > /dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
 if command -v rbenv > /dev/null; then
@@ -35,6 +37,7 @@ fi
 
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export PATH=$PATH:~/.local/bin
 
 autoload -U add-zsh-hook
 load-nvmrc() {
