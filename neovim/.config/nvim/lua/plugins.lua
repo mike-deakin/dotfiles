@@ -114,7 +114,8 @@ return require('packer').startup({
         'haydenmeade/neotest-jest',
         'rouge8/neotest-rust',
         'nvim-neotest/neotest-plenary',
-        '~/play/neotest-junit'
+        --'~/play/neotest-junit'
+        'nvim-neotest/nvim-nio'
       },
     }
     use {
@@ -215,10 +216,6 @@ return require('packer').startup({
     use {
       'Joakker/lua-json5',
       run = './install.sh'
-    }
-    use {
-      'fwcd/kotlin-language-server',
-      run = './gradlew installDist',
     }
 
     if packer_bootstrap then

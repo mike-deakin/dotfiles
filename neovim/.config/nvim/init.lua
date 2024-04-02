@@ -29,6 +29,7 @@ require'theme'
 require'keymap'
 require'dap-config'
 require'telescope-config'
+require'filetypes'
 local terminal = require'terminal'
 
 vim.api.nvim_create_user_command('Term', function ()
