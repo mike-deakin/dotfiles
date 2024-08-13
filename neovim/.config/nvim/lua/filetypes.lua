@@ -1,5 +1,6 @@
 vim.filetype.add({
     pattern = {
-        ['.*gitconfig.*'] = 'gitconfig'
+        ['.*gitconfig.*'] = 'gitconfig',
+        ['.*.zsh.*'] = 'zsh'
     }
 })
