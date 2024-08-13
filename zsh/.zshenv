@@ -24,3 +24,4 @@ export XDG_RUNTIME_DIR=$HOME/.runtime
 export ZK_NOTEBOOK_DIR=$HOME/slipbox
 
 export NVM_DIR=$HOME/.config/nvm
+. "$HOME/.cargo/env"

@@ -68,4 +68,5 @@ if [ -f "$HOME/play/.zshrc" ]; then source "$HOME/play/.zshrc"; fi
 if [ -f "$HOME/.local.zshrc" ]; then source "$HOME/.local.zshrc"; fi
 if [ -s "$NVM_DIR/nvm.sh" ]; then source "$NVM_DIR/nvm.sh"; fi  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
