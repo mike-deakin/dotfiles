@@ -1,7 +1,6 @@
 -- Language Server Protocol
 local nvim_lsp = require 'lspconfig'
 local merge = require 'merge'
-local peek_definition = require 'peek'
 
 local M = {}
 
@@ -67,6 +66,7 @@ local servers = {
       }
     }
   },
+  ruby_lsp = {},
   pylsp = {},
   tsserver = {},
   gopls = {},
