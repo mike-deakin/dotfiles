@@ -35,7 +35,7 @@ return require('packer').startup({
         'nvim-lua/plenary.nvim',
       },
       config = function()
-        require'hardtime'.setup()
+        require 'hardtime'.setup()
       end,
     }
 
@@ -43,7 +43,7 @@ return require('packer').startup({
     use 'navarasu/onedark.nvim'
     use 'nvim-lualine/lualine.nvim'
     use 'lukas-reineke/indent-blankline.nvim' -- Show indentation levels
-    use { 'akinsho/bufferline.nvim', tag = 'v3.*', requires = 'kyazdani42/nvim-web-devicons' }
+    use { 'akinsho/bufferline.nvim', tag = 'v4.*', requires = 'kyazdani42/nvim-web-devicons' }
 
     -- file browser
     use {
@@ -133,7 +133,7 @@ return require('packer').startup({
     }
     use {
       'mfussenegger/nvim-jdtls', -- Java language server
-      module = { 'jdtls' }
+      module = { 'jdtls' },
     }
 
     -- Debugging
@@ -199,6 +199,30 @@ return require('packer').startup({
       end,
       cmd = { 'Glow' }
     }
+    use { 'liuchengxu/graphviz.vim' }
+    use { 'aklt/plantuml-syntax' }
+    --use {
+      --'https://gitlab.com/itaranto/plantuml.nvim',
+      --requires = { 'aklt/plantuml-syntax' },
+      --tag = '*',
+      --ft = { 'plantuml' },
+      --config = function()
+        --require 'plantuml'.setup()
+      --end
+    --}
+
+
+    --use {
+      --'moyiz/git-dev.nvim',
+      --cmd = { 'GitDev*' },
+      --config = function()
+        --require 'git-dev'.setup({
+          --git = {
+            --base_uri_format = 'git@github.com:%s.git'
+          --}
+        --})
+      --end,
+    --}
     use {
       'luckasRanarison/nvim-devdocs',
       requires = {
