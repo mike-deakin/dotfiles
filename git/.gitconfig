@@ -19,5 +19,7 @@
 	path = ~/.gitconfig-work
 [includeIf "gitdir:~/play/**"]
 	path = ~/.gitconfig-play
+[includeIf "gitdir:~/dotfiles/**"]
+	path = ~/.gitconfig-play
 [url "git@github.com:"]
 	insteadOf = https://github.com/
