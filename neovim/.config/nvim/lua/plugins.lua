@@ -91,7 +91,9 @@ return require('packer').startup({
       },
       config = function() require 'lsp' end
     }
-    use { 'weilbith/nvim-code-action-menu', opt = true, cmd = 'CodeActionMenu' } -- lsp code actions in descriptive window
+    use {
+      "aznhe21/actions-preview.nvim",
+    }
     use {
       'nvim-telescope/telescope.nvim',
       requires = {
