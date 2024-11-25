@@ -1,11 +1,15 @@
-local wt = require'wezterm'
+local wt = require 'wezterm'
 
 local function get_current_working_dir(tab)
-  local current_dir = tab.active_pane.current_working_dir
-  local HOME_DIR = string.format('file://%s', os.getenv('HOME'))
+  local current_dir = tab.active_pane.current_working_dir.file_path
+  local HOME_DIR = os.getenv('HOME')
+  local dirname = string.gsub(current_dir, '(.*[/\\])(.*)', '%2')
 
-  return current_dir == HOME_DIR and '~'
-      or string.gsub(current_dir, '(.*[/\\])(.*)', '%2')
+  if string.len(dirname) > 12 then
+    dirname = string.gsub(dirname, '(%w)%w*[-_ ]', '%1-')
+  end
+
+  return current_dir == HOME_DIR and '~' or dirname
 end
 
 local function tab_has_unseen_output(tab)
@@ -19,14 +23,13 @@ local function tab_has_unseen_output(tab)
   return false
 end
 
-return function (config)
+return function(config)
   config.tab_bar_at_bottom = true
   config.use_fancy_tab_bar = false
 
   wt.on(
     'format-tab-title',
-    function(tab, tabs, panes, config, hover, max_width)
-
+    function(tab, _tabs, _panes, _config, _hover, _max_width)
       local cwd = wt.format({
         { Attribute = { Intensity = 'Bold' } },
         { Text = get_current_working_dir(tab) },
