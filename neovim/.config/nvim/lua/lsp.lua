@@ -66,9 +66,15 @@ local servers = {
       }
     }
   },
+  cucumber_language_server = {
+    settings = {
+    cucumber = {
+      glue = { './**/*.java' }
+    }}
+  },
   ruby_lsp = {},
   pylsp = {},
-  tsserver = {},
+  ts_ls = {},
   gopls = {},
   hls = {},
   elixirls = {

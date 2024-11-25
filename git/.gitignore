@@ -1,3 +1,10 @@
 Session.vim
 **/.DS_Store
 workspace
+
+# Java LSP debris
+**/.jdtls
+**/.settings
+**/.classpath
+**/.factorypath
+**/.project
