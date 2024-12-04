@@ -36,7 +36,7 @@ install_nvim () {
 	echo Installing neovim to /appimage/neovim
 	./nvim.appimage --appimage-extract
 	mv squashfs-root/* /appimage/neovim/
-	ln -s /appimage/neovim/AppRunn /usr/bin/nvim
+	ln -s /appimage/neovim/AppRun /usr/bin/nvim
 
 	cd .. && rm -rf __temp
 }
