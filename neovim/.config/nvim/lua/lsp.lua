@@ -85,6 +85,7 @@ local servers = {
       vim.fn.stdpath('data') ..
       '/site/pack/packer/start/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
   },
+  jsonls = {},
   yamlls = {
     settings = {
       yaml = {
