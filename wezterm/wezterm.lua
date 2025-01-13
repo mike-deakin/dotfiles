@@ -6,11 +6,10 @@ if wt.config_builder then
   config = wt.config_builder()
 end
 
-config.term = 'wezterm'
+config.term = 'wezterm' -- https://wezfurlong.org/wezterm/config/lua/config/term.html
 config.color_scheme = 'Andromeda'
 config.font = wt.font 'Hack Nerd Font Mono'
 config.underline_position = '-3'
-config.send_composed_key_when_left_alt_is_pressed = true
 config.window_padding = {
   left = 3,
   right = 3,

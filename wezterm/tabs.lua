@@ -29,6 +29,7 @@ return function(config)
 
   wt.on(
     'format-tab-title',
+---@diagnostic disable-next-line: unused-local
     function(tab, _tabs, _panes, _config, _hover, _max_width)
       local cwd = wt.format({
         { Attribute = { Intensity = 'Bold' } },
