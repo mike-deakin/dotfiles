@@ -4,6 +4,17 @@ pcall(telescope.load_extension,'fzf')
 pcall(telescope.load_extension,'packer')
 pcall(telescope.load_extension,'hoogle')
 
+telescope.setup({
+  pickers = {
+    live_grep = {
+      file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+      additional_args = function (_)
+        return { '--hidden' }
+      end,
+    }
+  }
+})
+
 local M = {}
 
 M.project_files = function()

@@ -63,7 +63,7 @@ ck.setup({
 		mode = 'n',
 		['b'] = {
 			desc = 'Buffer management',
-			['b'] = { act = ck.cmd 'BufferLinePick' },
+			['b'] = { act = ck.cmd 'BufferLinePick', desc = 'Pick buffer by label' },
 			['d'] = { act = ck.cmd 'bd', desc = 'Delete current' },
 			['a'] = { act = ck.cmd '%bd', desc = 'Delete all' },
 			['o'] = { act = ck.cmd '%bd|e#', desc = 'Delete others' },
@@ -76,20 +76,29 @@ ck.setup({
 			return {
 				name = 'Telescope',
 				desc = 'Fuzzy-finder',
-				['f'] = { act = tb.git_files },
+				['f'] = { act = tb.git_files, desc = 'Find files in git' },
 				['o'] = { act = function() tb.git_files({ others = true }) end },
-				['h'] = { act = function() tb.find_files({ hidden = true }) end },
-				['g'] = { act = tb.live_grep },
-				['b'] = { act = tb.buffers },
-				['k'] = { act = tb.keymaps },
-				['c'] = { act = tb.comands },
-				['?'] = { act = tb.help_tags },
+				['h'] = { act = function() tb.find_files({ hidden = true }) end, desc = 'Find in all files' },
+				['g'] = { act = tb.live_grep, desc = 'Grep for text in files' },
+				['b'] = { act = tb.buffers, desc = 'Search for buffers' },
+				['k'] = { act = tb.keymaps, desc = 'Serach in keymap' },
+				['c'] = { act = tb.comands, desc = 'Serach for user commands' },
+				['s'] = { act = tb.treesitter, desc = 'Search treesitter symbols' },
+				['w'] = { act = tb.grep_string, desc = 'Find word under cursor' },
+				['?'] = { act = tb.help_tags, desc = 'Search help pages' },
 			}
 		end,
-		['g'] = {
-			desc = 'Grep string in buffer',
-			act = function() require 'telescope.builtin'.grep_string() end
-		},
+		['g'] = function()
+			local tb = require 'telescope.builtin'
+
+			return {
+				name = 'Git operations',
+				['b'] = { act = tb.git_bcommits, desc = 'Commit log of current buffer' },
+				['c'] = { act = tb.git_commits, desc = 'Commit log of current directory/project' },
+				['s'] = { act = tb.git_branches, desc = 'List & switch branches' },
+				['d'] = { act = tb.git_status, desc = 'Status/diff view' },
+			}
+		end,
 		['d'] = function()
 			local dap = require 'dap'
 

@@ -95,13 +95,14 @@ return require('packer').startup({
       "aznhe21/actions-preview.nvim",
     }
     use {
-      'nvim-telescope/telescope.nvim',
+      'nvim-telescope/telescope.nvim',  -- Fuzzy finder window
       requires = {
         'nvim-lua/plenary.nvim',
         'psiska/telescope-hoogle.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-      }
-    }                                                 -- Fuzzy finder
+      },
+      config = function() require 'telescope-config' end,
+    }
     use 'nvim-treesitter/nvim-treesitter-textobjects' -- Syntax-aware motions
     use 'ziontee113/syntax-tree-surfer'               -- Syntax-aware motions
     use 'ckolkey/ts-node-action'

@@ -28,7 +28,6 @@ require'plugins'
 require'theme'
 require'keymap'
 require'dap-config'
-require'telescope-config'
 require'filetypes'
 local terminal = require'terminal'
 
