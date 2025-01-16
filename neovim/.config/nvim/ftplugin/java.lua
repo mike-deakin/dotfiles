@@ -16,7 +16,7 @@ require('jdtls').start_or_attach({
             signatureHelp = { enabled = true },
             completion = {
                 importOrder = { -- Import order roughly matches IntelliJ ordering
-                    "", -- "All other packages"
+                    "",         -- "All other packages"
                     "java",
                     "javax",
                     "#", -- "All static imports"
@@ -45,3 +45,5 @@ require('jdtls').start_or_attach({
 --})
 
 --require 'caskey'.emit('NeoTestConfigured')
+
+vim.api.nvim_set_option_value('shiftwidth', 4, {})

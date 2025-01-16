@@ -66,12 +66,10 @@ return require('packer').startup({
     use { 'jbyuki/instant.nvim', opt = true, cmd = { 'InstantStartSession', 'InstantJoinSession' } }
 
     -- Additional functions
-    use 'tpope/vim-sleuth'                                                  -- auto indent width detection
     use 'tpope/vim-surround'                                                -- surround text with matching character pairs ()[]{}, etc
     use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } } -- word-related mutations (case, endings, search/replace, etc
     use 'chaoren/vim-wordmotion'                                            -- camel-case word motions
     use 'scrooloose/nerdcommenter'
-    --use 'ggandor/leap.nvim'                                                      -- label-based navigation (like vimium)
     use 'folke/flash.nvim'
     use { 'nat-418/boole.nvim', config = function() require 'boole-config' end } -- Better increment/decrement functions
     use {
