@@ -5,6 +5,8 @@ Powered by zsh|tmux|neovim
 ## TODO/FIXME
 
  * [all] fix install pathing ___Because___ wezterm install script was incorrectly changing directory for symbolic links made later.
+ * [nvim] Add better indent guessing - [indent-o-matic](https://github.com/Darazaki/indent-o-matic) looks reasonable?
+ * [nvim] Improve Java support: [nvim-java](https://github.com/nvim-java/nvim-java) seems mostly better than the manual jdtls config
  * [nvim] Write functions to go to/from test files
  * [nvim] Buffer-local keymaps for neotest per filetype.
  * [nvim] Replace `vim-surround` ___Because___ there are some newer alternatives with nicer APIs/key bindings
