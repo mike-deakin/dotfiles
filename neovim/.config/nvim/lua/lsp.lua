@@ -4,6 +4,11 @@ local merge = require 'merge'
 
 local M = {}
 
+M.toggle_hints = function()
+  local is_enabled = vim.lsp.inlay_hint.is_enabled()
+  vim.lsp.inlay_hint.enable(not is_enabled)
+end
+
 local set_mappings = function(bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -14,6 +19,7 @@ local set_mappings = function(bufnr)
   vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
   vim.keymap.set('n', 'gs', '<cmd>Telescope lsp_document_symbols<CR>', opts)
   vim.keymap.set('n', 'gS', '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
+  vim.keymap.set('n', '<C-n>', M.toggle_hints, opts)
   vim.keymap.set({ 'n', 'i' }, '<C-h>', vim.lsp.buf.hover, opts)
   vim.keymap.set({ 'n', 'i' }, '<C-y>', vim.lsp.buf.signature_help, opts)
   --vim.keymap.set({ 'n', 'i' }, '<C-d>', peek_definition, opts)
@@ -53,6 +59,9 @@ local servers = {
   lua_ls = {
     settings = {
       Lua = {
+        hint = {
+          enable = true,
+        },
         runtime = {
           version = 'LuaJIT',
         },
@@ -68,9 +77,10 @@ local servers = {
   },
   cucumber_language_server = {
     settings = {
-    cucumber = {
-      glue = { './**/*.java' }
-    }}
+      cucumber = {
+        glue = { './**/*.java' }
+      }
+    }
   },
   ruby_lsp = {},
   pylsp = {},
@@ -97,7 +107,9 @@ local servers = {
       }
     }
   },
-  rust_analyzer = {},
+  rust_analyzer = {
+    --cmd_env = {["RUSTUP_TOOLCHAIN"] = "stable"},
+  },
 }
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
