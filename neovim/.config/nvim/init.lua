@@ -10,6 +10,7 @@ vim.opt.mouse = ""
 vim.opt.fileencodings = vim.opt.fileencodings + { 'utf-8' }
 vim.opt.encoding = 'utf-8'
 vim.g.maplocalleader = ','
+vim.g.editorconfig = true
 
 -- Tabs & Whitespace
 vim.opt.tabstop = 4 -- column width of tab character
