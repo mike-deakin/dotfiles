@@ -66,9 +66,9 @@ return require('packer').startup({
     use { 'jbyuki/instant.nvim', opt = true, cmd = { 'InstantStartSession', 'InstantJoinSession' } }
 
     -- Additional functions
-    use 'tpope/vim-surround'                                                -- surround text with matching character pairs ()[]{}, etc
-    use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } } -- word-related mutations (case, endings, search/replace, etc
-    use 'chaoren/vim-wordmotion'                                            -- camel-case word motions
+    use { 'echasnovski/mini.surround', config = function() require 'mini.surround'.setup() end } -- surround text with matching character pairs ()[]{}, etc
+    use { 'tpope/vim-abolish', opt = true, cmd = { 'Abolish', 'Subvert' } }                      -- word-related mutations (case, endings, search/replace, etc
+    use 'chaoren/vim-wordmotion'                                                                 -- camel-case word motions
     use 'scrooloose/nerdcommenter'
     use 'folke/flash.nvim'
     use { 'nat-418/boole.nvim', config = function() require 'boole-config' end } -- Better increment/decrement functions
@@ -90,10 +90,13 @@ return require('packer').startup({
       config = function() require 'lsp' end
     }
     use {
+      'mrcjkb/rustaceanvim'
+    }
+    use {
       "aznhe21/actions-preview.nvim",
     }
     use {
-      'nvim-telescope/telescope.nvim',  -- Fuzzy finder window
+      'nvim-telescope/telescope.nvim', -- Fuzzy finder window
       requires = {
         'nvim-lua/plenary.nvim',
         'psiska/telescope-hoogle.nvim',
@@ -202,28 +205,6 @@ return require('packer').startup({
     }
     use { 'liuchengxu/graphviz.vim' }
     use { 'aklt/plantuml-syntax' }
-    --use {
-      --'https://gitlab.com/itaranto/plantuml.nvim',
-      --requires = { 'aklt/plantuml-syntax' },
-      --tag = '*',
-      --ft = { 'plantuml' },
-      --config = function()
-        --require 'plantuml'.setup()
-      --end
-    --}
-
-
-    --use {
-      --'moyiz/git-dev.nvim',
-      --cmd = { 'GitDev*' },
-      --config = function()
-        --require 'git-dev'.setup({
-          --git = {
-            --base_uri_format = 'git@github.com:%s.git'
-          --}
-        --})
-      --end,
-    --}
     use {
       'luckasRanarison/nvim-devdocs',
       requires = {

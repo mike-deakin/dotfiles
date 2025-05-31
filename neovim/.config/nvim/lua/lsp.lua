@@ -50,6 +50,19 @@ function M.on_attach(client, bufnr)
   set_mappings(bufnr)
 end
 
+vim.g.rustaceanvim = {
+  server = {
+    on_attach = M.on_attach,
+    default_settings = {
+      ['rust-analyzer'] = {
+        cargo = {
+          extraEnv = { ["RUSTUP_TOOLCHAIN"] = "stable" }
+        }
+      }
+    }
+  }
+}
+
 -- cmp completions
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -91,9 +104,9 @@ local servers = {
     cmd = { vim.env.HOME .. '/.config/lsp/elixirls/language_server.sh' } -- TODO: install through scripts
   },
   kotlin_language_server = {
-    cmd = {
-      vim.fn.stdpath('data') ..
-      '/site/pack/packer/start/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
+    --cmd = {
+      --vim.fn.stdpath('data') ..
+      --'/site/pack/packer/start/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
   },
   jsonls = {},
   yamlls = {
@@ -106,9 +119,6 @@ local servers = {
         }
       }
     }
-  },
-  rust_analyzer = {
-    --cmd_env = {["RUSTUP_TOOLCHAIN"] = "stable"},
   },
 }
 
