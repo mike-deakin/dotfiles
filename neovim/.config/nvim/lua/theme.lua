@@ -34,7 +34,7 @@ require 'lualine'.setup {
 -- bufferline just copies whatever colors the highlight 'Normal' has
 -- but that looks awful with a transparent background
 -- This sets it to a prettier color first, sets up bufferline, then reverts 'Normal'
-local normal_hl = vim.api.nvim_get_hl_by_name('Normal', true)
+local normal_hl = vim.api.nvim_get_hl(0, {name = 'Normal', link = true})
 vim.api.nvim_set_hl(0, 'Normal', { bg = '#3b3f4c' })
 
 require 'bufferline'.setup {
@@ -85,11 +85,3 @@ require('ibl').setup {
         highlight = {'Whitespace'}
     }
 }
---require("indent_blankline").setup {
---char = '┊',
---context_char = '▏',
---use_treesitter = true,
---show_end_of_line = true,
---show_current_context = true,
---show_current_context_start = true,
---}
