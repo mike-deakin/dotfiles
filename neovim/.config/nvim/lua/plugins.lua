@@ -108,7 +108,7 @@ return require('packer').startup({
     use 'ziontee113/syntax-tree-surfer'               -- Syntax-aware motions
     use 'ckolkey/ts-node-action'
     use 'airblade/vim-gitgutter'
-    use 'f-person/git-blame.nvim'
+    use {'f-person/git-blame.nvim', branch = 'main'}
     use {
       'nvim-neotest/neotest',
       requires = {
@@ -190,7 +190,7 @@ return require('packer').startup({
       end
     }
     use {
-      'ellisonleao/glow.nvim',
+      'ellisonleao/glow.nvim', -- Markdown renderer/reader
       config = function()
         require('glow').setup({
           width = 999,
