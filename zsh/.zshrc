@@ -75,3 +75,19 @@ if [ -f "$HOME/.local.zshrc" ]; then source "$HOME/.local.zshrc"; fi
 if [ -f "$HOME/.deno/env" ]; then source "$HOME/.deno/env"; fi
 
 autoload -U compinit; compinit
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/mike/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/mike/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/mike/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/mike/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
