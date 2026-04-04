@@ -7,3 +7,4 @@ neovim/.config/nvim/spell/
 tmux/plugins
 **/.luarc.json
 zsh/.zcompdump
+neovim/.config/nvim/jdtls_style/
