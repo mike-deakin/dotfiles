@@ -1,5 +1,4 @@
 -- Language Server Protocol
-local nvim_lsp = require 'lspconfig'
 local merge = require 'merge'
 
 local M = {}
@@ -30,8 +29,8 @@ local set_mappings = function(bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
   vim.keymap.set('n', '<space>ca', require('actions-preview').code_actions, opts)
   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count = 1, float = true}) end, opts)
-  vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count = -1, float = true}) end, opts)
+  vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count = -1, float = true}) end, opts)
+  vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count = 1, float = true}) end, opts)
   vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
   vim.keymap.set('n', '<space>do', '<cmd>Telescope diagnostics<CR>', opts)
   vim.keymap.set('n', '<space>f', function() require "format-options".editorconfigLspFormat({ async = true }) end, opts)
@@ -125,7 +124,7 @@ local servers = {
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 for lsp, conf in pairs(servers) do
-  nvim_lsp[lsp].setup(merge({
+  vim.lsp.config(lsp, merge({
     on_attach = M.on_attach,
     flags = {
       debounce_text_changes = 150,

@@ -21,6 +21,6 @@ pcall(function()
   dapext.json_decode = require 'json5'.parse
 end)
 
-pcall(dapext.load_launchjs, nil, {
-  ['pwa-node'] = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' }
-})
+--pcall(dapext.load_launchjs, nil, {
+--  ['pwa-node'] = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' }
+--})

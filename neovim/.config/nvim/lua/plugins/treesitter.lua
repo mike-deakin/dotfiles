@@ -1,6 +1,25 @@
----@diagnostic disable: missing-fields
-require 'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'html' },
+local ts_config = {
+    ensure_installed = {
+      'html',
+      'bash',
+      'c',
+      'elixir',
+      'go',
+      'graphql',
+      'haskell',
+      'hcl',
+      'html',
+      'java',
+      'javascript',
+      'kotlin',
+      'lua',
+      'python',
+      'query',
+      'rust',
+      'tsx',
+      'typescript',
+      'vim',
+    },
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -83,7 +102,21 @@ require 'nvim-treesitter.configs'.setup {
     },
 }
 
-vim.opt.foldenable = true
-vim.opt.foldlevel = 9 -- This breaks 'zm', but I never use that. 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+return {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    init = function()
+      vim.opt.foldenable = true
+      vim.opt.foldlevel = 9 -- This breaks 'zm', but I never use that.
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    end,
+    opts = ts_config
+  },
+  {
+    'nvim-treesitter/playground',
+    lazy = true,
+    cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' }
+  },
+}

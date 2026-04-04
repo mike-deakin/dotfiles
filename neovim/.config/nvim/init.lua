@@ -9,7 +9,7 @@ vim.opt.scrolloff = 20
 vim.opt.mouse = ""
 vim.opt.fileencodings = vim.opt.fileencodings + { 'utf-8' }
 vim.opt.encoding = 'utf-8'
-vim.g.maplocalleader = ','
+vim.g.maplocalleader = ' '
 vim.g.editorconfig = true
 
 -- Tabs & Whitespace
@@ -25,7 +25,7 @@ vim.opt.completeopt = "menu,menuone,noselect"
 
 vim.g.instant_username = 'mdeakin'
 
-require'plugins'
+require'lazy-plugins'
 require'theme'
 require'keymap'
 require'dap-config'

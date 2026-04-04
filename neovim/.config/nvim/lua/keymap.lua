@@ -9,7 +9,7 @@ end
 local cmd = vim.cmd
 local ck = require 'caskey'
 --local nodenav = require 'treesitter-nodenav' -- This doesn't work :(
-local sts = require 'syntax-tree-surfer'
+--local sts = require 'syntax-tree-surfer'
 
 ck.setup({
 	{
@@ -33,29 +33,29 @@ ck.setup({
 		mode = 'n',
 		name = 'Treesitter actions',
 		desc = 'Moves and swaps powered by Treesitter (not dot-repeatable yet)',
-		['<M-P>'] = { act = function() sts.move('n', true) end, desc = 'Swap parent node with its previous sibling' },
-		['<M-N>'] = { act = function() sts.move('n', false) end, desc = 'Swap parent node with its next sibling' },
-		['<M-p>'] = { act = function() sts.surf('prev', 'normal', true) end, desc = 'Swap node with previous sibling' },
-		['<M-n>'] = { act = function() sts.surf('next', 'normal', true) end, desc = 'Swap node with next sibling' },
+		--['<M-P>'] = { act = function() sts.move('n', true) end, desc = 'Swap parent node with its previous sibling' },
+		--['<M-N>'] = { act = function() sts.move('n', false) end, desc = 'Swap parent node with its next sibling' },
+		--['<M-p>'] = { act = function() sts.surf('prev', 'normal', true) end, desc = 'Swap node with previous sibling' },
+		--['<M-n>'] = { act = function() sts.surf('next', 'normal', true) end, desc = 'Swap node with next sibling' },
 	},
 	{
 		mode = { 'n', 'x', 'o' },
 		name = 'Flash motions',
-		['<M-s>'] = { act = function() require 'flash'.jump() end, desc = 'Jump cursor search'},
-		['<M-S>'] = { act = function() require 'flash'.treesitter() end, desc = 'Jump cursor to Treesitter node search'},
+		['<M-s>'] = { act = function() require 'flash'.jump() end, desc = 'Jump cursor search' },
+		['<M-S>'] = { act = function() require 'flash'.treesitter() end, desc = 'Jump cursor to Treesitter node search' },
 	},
 	{
 		name = 'Line moves',
 		desc = 'Moves and swaps by line',
 		{
 			mode = 'n',
-			['<M-j>'] = { act = require 'move-line'.moveLineDown, desc = 'Move line down'},
-			['<M-k>'] = { act = require 'move-line'.moveLineUp, desc = 'Move line up'},
+			['<M-j>'] = { act = require 'move-line'.moveLineDown, desc = 'Move line down' },
+			['<M-k>'] = { act = require 'move-line'.moveLineUp, desc = 'Move line up' },
 		},
 		{
 			mode = 'x',
 			['<M-j>'] = { act = require 'move-line'.moveLinesDown, desc = 'Move selection down' },
-			['<M-k>'] = { act = require 'move-line'.moveLinesUp, desc = 'Move selection up'},
+			['<M-k>'] = { act = require 'move-line'.moveLinesUp, desc = 'Move selection up' },
 		},
 	},
 	['<leader>'] = {
@@ -134,6 +134,55 @@ ck.setup({
 			desc = 'TreeSitter node action',
 		},
 	},
+
+	{
+		desc = 'LSP commands',
+		when = 'LspAttach',
+		mode = 'n',
+
+		['<localleader>'] = {
+			['rn'] = { act = vim.lsp.buf.rename, desc = 'Rename symbol' },
+			['f'] = {
+				act = function() require 'format-options'.editorconfigLspFormat({ async = true }) end,
+				desc = 'Reformat current file'
+			},
+			['ca'] = { act = require 'actions-preview'.code_actions, desc = 'LSP suggested code actions' },
+			['oi'] = {
+				act = function()
+					vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+				end,
+				desc = 'Optimise/arrange imports'
+			},
+			['e'] = { act = vim.diagnostic.open_float, desc = 'Show LSP warning/error in a float' },
+			['q'] = { act = vim.diagnostic.setloclist, desc = 'Populate loclist with diagnostics' },
+			['E'] = { act = ck.cmd 'Telescope diagnostics', desc = 'View and search all diagnostics' },
+		},
+		['g'] = {
+			desc = 'Go-to commands',
+			['d'] = { act = ck.cmd 'Telescope lsp_definitions', desc = 'Go to symbol definition(s)' },
+			['D'] = { act = vim.lsp.buf.declaration, desc = 'Go to symbol declaration' },
+			['T'] = { act = ck.cmd 'Telescope lsp_type_definitions' },
+			['i'] = { act = ck.cmd 'Telescope lsp_implementations', desc = 'Go to interface implementation(s)' },
+			['r'] = { act = ck.cmd 'Telescope lsp_references', desc = 'Go to symbol usages/references' },
+			['s'] = { act = ck.cmd 'Telescope lsp_document_symbols' },
+			['S'] = { act = ck.cmd 'Telescope lsp_workspace_symbols' },
+		},
+
+		{
+			mode_extend = 'i',
+			desc = 'Mid-edit additional data',
+			['<C-h>'] = { act = vim.lsp.buf.hover, desc = 'LSP Hover hint' },
+			['<C-y>'] = { act = vim.lsp.buf.signature_help, desc = 'Function signature help' },
+			['<C-n>'] = {
+				act = function()
+					local is_enabled = vim.lsp.inlay_hint.is_enabled()
+					vim.lsp.inlay_hint.enable(not is_enabled)
+				end,
+				desc = 'Toggle in-line hints'
+			},
+		}
+	}
+
 })
 
 -- QoL Hacks

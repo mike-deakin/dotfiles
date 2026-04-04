@@ -8,7 +8,9 @@ od.setup {
     term_colors = false,
     ending_tildes = false,
     highlights = {
+        ['@lsp.type.comment'] = { fg = '#e55561', fmt = 'italic' },
         ['@comment'] = { fg = '#e55561', fmt = 'italic' },
+        --['@lsp.type.comment'] = { link = '@comment' },
         ['@todo'] = { fg = '#e55561', fmt = 'bold' }
     }
 }
