@@ -30,8 +30,8 @@ install_nvim () {
 	mkdir __temp && cd __temp
 
 	echo Downloading neovim appimage
-	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-	chmod u+x nvim.appimage
+	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+	chmod u+x nvim-linux-x86_64.appimage
 
 	echo Installing neovim to /appimage/neovim
 	./nvim.appimage --appimage-extract
