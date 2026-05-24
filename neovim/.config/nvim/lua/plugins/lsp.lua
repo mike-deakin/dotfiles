@@ -23,9 +23,9 @@ vim.lsp.config('lua_ls', {
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(_args)
-		local opts = { noremap = true, silent = true, buffer = bufnr }
-		--vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+	callback = function(args)
+		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+		client.server_capabilities.semanticTokensProvider = nil
 	end
 })
 
@@ -52,6 +52,7 @@ return {
 				'ruby_lsp',
 				'jsonls',
 				'yamlls',
+				'marksman'
 			}
 			for _, server in ipairs(servers) do
 				vim.lsp.enable(server)
