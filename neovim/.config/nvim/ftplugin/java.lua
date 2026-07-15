@@ -1,5 +1,3 @@
-local lsp_config = require 'lsp'
-
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = vim.env.HOME .. '/.cache/jdtls/' .. project_name
 
@@ -10,7 +8,6 @@ require('jdtls').start_or_attach({
     '-configuration ' .. vim.env.HOME .. '/.cache/jdtls',
     '-data', workspace_dir,
   },
-  on_attach = lsp_config.on_attach,
   settings = {
     java = {
       signatureHelp = { enabled = true },

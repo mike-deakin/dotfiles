@@ -113,10 +113,5 @@ return {
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end,
     opts = ts_config
-  },
-  {
-    'nvim-treesitter/playground',
-    lazy = true,
-    cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' }
-  },
+  }
 }

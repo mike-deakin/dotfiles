@@ -42,9 +42,9 @@ end
 -- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
-  if client.server_capabilities.signatureHelpProvider then
-    require('lsp-overloads').setup(client, {})
-  end
+  --if client.server_capabilities.signatureHelpProvider then
+    --require('lsp-overloads').setup(client, {})
+  --end
 
   set_mappings(bufnr)
 end

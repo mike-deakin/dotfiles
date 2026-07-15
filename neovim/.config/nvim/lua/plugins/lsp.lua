@@ -36,6 +36,10 @@ return {
 		lazy = false, -- This plugin is already lazy, so no need to double the lazy
 	},
 	{
+		"Issafalcon/lsp-overloads.nvim",
+		event = "LspAttach"
+	},
+	{
 		'neovim/nvim-lspconfig',
 		dependencies = {
 			'hrsh7th/cmp-nvim-lsp',
