@@ -10,11 +10,14 @@ od.setup {
     highlights = {
         ['@lsp.type.comment'] = { fg = '#e55561', fmt = 'italic' },
         ['@comment'] = { fg = '#e55561', fmt = 'italic' },
-        --['@lsp.type.comment'] = { link = '@comment' },
-        ['@todo'] = { fg = '#e55561', fmt = 'bold' }
+        ['@todo'] = { fg = '#e55561', fmt = 'bold' },
+        ['@comment.error'] = { fg = '#e55561', fmt = 'standout'},
     }
 }
 od.load()
+vim.api.nvim_set_hl(0, 'Comment', { link = '@comment' })
+vim.api.nvim_set_hl(0, 'Todo', { link = '@todo' })
+vim.api.nvim_set_hl(0, 'Fixme', { link = '@comment.error' })
 
 require 'lualine'.setup {
     options = {
@@ -32,7 +35,7 @@ require 'lualine'.setup {
     },
 }
 
--- Big, smelly hack incoming!
+-- WARNING: Big, smelly hack incoming!
 -- bufferline just copies whatever colors the highlight 'Normal' has
 -- but that looks awful with a transparent background
 -- This sets it to a prettier color first, sets up bufferline, then reverts 'Normal'
